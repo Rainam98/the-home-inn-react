@@ -1,52 +1,63 @@
-{
-  "properties": [
-    {
-      "title": "Sequoia Ridgetop Airbnb with a Private Pool",
-      "description": "Located in Three Rivers, within 1.9 miles of Three Rivers and 4.4 miles of Kaweah, Sequoia Ridgetop Home - Breathtaking Views & Pool!",
-      "nightlyFee": "337",
-      "serviceFee": "32",
-      "cleaningFee": "25",
-      "amenities": "Pool, Sports bar, game room, Free Wifi.",
-      "bedrooms": "4",
-      "guests": "8",
-      "location": "Three Rivers, California",
-      "dateAvailability": "Nov 4 - 10"
-    },
-    {
-      "title": "Lake Coeur d’Alene, Idaho",
-      "description": "Coeur d’Alene Lake is the second largest lake in northern Idaho, caught in a beautiful mountain setting created when  great lobes of the continental ice cap receded during the last Ice Age. The lake is over 26 miles long with some 135 miles of shoreline, dotted with numerous parks, campgrounds, beaches, trails and recreational facilities. The lake is fed primarily by two rivers, the Coeur d’Alene River and St. Joe River, and its outlet forms the Spokane River. A natural lake, the lake level is controlled by discharges from the Post Falls Dam operated by Avista.",
-      "nightlyFee": "372",
-      "serviceFee": "57",
-      "cleaningFee": "35",
-      "amenities": "Boating, Nature Walk, Free Wifi, Fishing.",
-      "bedrooms": "5",
-      "guests": "10",
-      "location": "Worley, Idaho",
-      "dateAvailability": "Oct 29 - Nov 5"
-    },
-    {
-      "title": "Turgut's Perfect Stay",
-      "description": "The home is equipped with everything you need for the perfect getaway. Directly off the interstate, our home is 3-5 min. away from local stores and Starbucks. Have a taste of Texas, while still having easy accessibility to all that Dallas and Rockwall has to offer!",
-      "nightlyFee": "220",
-      "serviceFee": "19",
-      "cleaningFee": "11",
-      "amenities": "Home Theatre, Pool, Game room, Playstation, Free Wifi, Breakfast included.",
-      "bedrooms": "2",
-      "guests": "4",
-      "location": "Forney, Texas",
-      "dateAvailability": "Nov 2 - 18"
-    },
-    {
-      "title": "Kissimmee Homes",
-      "description": "With the largest collection of vacation home rentals in the world, it’s easy to see why Kissimmee is the Vacation Home Capital of the World®. Take your pick of everything from condos, pool homes, high-value villas, and single-family abodes to 12-bedroom mansions, perfect for reunions or friends sharing a golf, shopping, or spa weekend. Plus, there are even pet-friendly vacation rentals, so that every member of the family can join in the fun. Enjoy all the comforts of home (with world-famous theme parks right in your backyard) at your Kissimmee, Florida vacation home.",
-      "nightlyFee": "790",
-      "serviceFee": "87",
-      "cleaningFee": "35",
-      "amenities": "Golf Course, Spa, Pool, Free wifi, Sauna, Nature walk.",
-      "bedrooms": "12",
-      "guests": "24",
-      "location": "Kissimmee, Florida",
-      "dateAvailability": "Oct 27 - Nov 19"
-    }
-  ]
-}
+[
+  {
+    "id": "1",
+    "imgSource": "images/property2.jpg",
+    "title": "Sequoia Ridgetop Airbnb with a Private Pool",
+    "description": "Located in Three Rivers, within 1.9 miles of Three Rivers and 4.4 miles of Kaweah, Sequoia Ridgetop Home - Breathtaking Views & Pool!",
+    "nightlyFee": "337",
+    "serviceFee": "32",
+    "cleaningFee": "25",
+    "amenities": "Pool, Sports bar, game room, Free Wifi.",
+    "bedrooms": "4",
+    "guests": "8",
+    "city": "Three Rivers",
+    "state": "California",
+    "dateAvailability": "Nov 4 - 10"
+  },
+  {
+    "id": "2",
+    "imgSource": "images/property3.jpg",
+    "title": "Lake Coeur d’Alene, Idaho",
+    "description": "Coeur d’Alene Lake is the second largest lake in northern Idaho, caught in a beautiful mountain setting created when  great lobes of the continental ice cap receded during the last Ice Age. The lake is over 26 miles long with some 135 miles of shoreline, dotted with numerous parks, campgrounds, beaches, trails and recreational facilities. The lake is fed primarily by two rivers, the Coeur d’Alene River and St. Joe River, and its outlet forms the Spokane River. A natural lake, the lake level is controlled by discharges from the Post Falls Dam operated by Avista.",
+    "nightlyFee": "372",
+    "serviceFee": "57",
+    "cleaningFee": "35",
+    "amenities": "Boating, Nature Walk, Free Wifi, Fishing.",
+    "bedrooms": "5",
+    "guests": "10",
+    "city": "Worley",
+    "state": "Idaho",
+    "dateAvailability": "Oct 29 - Nov 5"
+  },
+  {
+    "id": "3",
+    "imgSource": "images/property4.jpg",
+    "title": "Turgut's Perfect Stay",
+    "description": "The home is equipped with everything you need for the perfect getaway. Directly off the interstate, our home is 3-5 min. away from local stores and Starbucks. Have a taste of Texas, while still having easy accessibility to all that Dallas and Rockwall has to offer!",
+    "nightlyFee": "220",
+    "serviceFee": "19",
+    "cleaningFee": "11",
+    "amenities": "Home Theatre, Pool, Game room, Playstation, Free Wifi, Breakfast included.",
+    "bedrooms": "2",
+    "guests": "4",
+    "location": "Forney, Texas",
+    "city": "Forney",
+    "state": "Idaho",
+    "dateAvailability": "Nov 2 - 18"
+  },
+  {
+    "id": "4",
+    "imgSource": "images/property5.jpg",
+    "title": "Kissimmee Homes",
+    "description": "With the largest collection of vacation home rentals in the world, it’s easy to see why Kissimmee is the Vacation Home Capital of the World®. Take your pick of everything from condos, pool homes, high-value villas, and single-family abodes to 12-bedroom mansions, perfect for reunions or friends sharing a golf, shopping, or spa weekend. Plus, there are even pet-friendly vacation rentals, so that every member of the family can join in the fun. Enjoy all the comforts of home (with world-famous theme parks right in your backyard) at your Kissimmee, Florida vacation home.",
+    "nightlyFee": "790",
+    "serviceFee": "87",
+    "cleaningFee": "35",
+    "amenities": "Golf Course, Spa, Pool, Free wifi, Sauna, Nature walk.",
+    "bedrooms": "12",
+    "guests": "24",
+    "city": "Kissimmee",
+    "state": "Florida",
+    "dateAvailability": "Oct 27 - Nov 19"
+  }
+]
