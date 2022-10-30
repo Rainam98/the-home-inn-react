@@ -10,7 +10,7 @@ const Properties = ({ properties, filterText }) => {
 
     function handleMoreDetails(property) {
 
-        setShowDetails(true);
+        setShowDetails(!showDetails);
         setShowPropertyDetails(property.id);
     }
 
@@ -20,14 +20,11 @@ const Properties = ({ properties, filterText }) => {
             {
                 properties.map((property) => {
 
-                    if (
-                        property.title.toLowerCase().indexOf(
-                            filterText.toLowerCase()
-                        ) === -1 
-                        
-                    ) {
-                        return (<div></div>);
-                    }
+                    if (!(property.title.toLowerCase().includes(filterText.toLowerCase()))
+                        && !(property.city.toLowerCase().includes(filterText.toLowerCase())) 
+                        ){
+                            return (<div></div>);
+                        }
                     
 
 
