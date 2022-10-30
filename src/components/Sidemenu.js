@@ -6,7 +6,8 @@ function Sidemenu() {
         <nav id="sidebar">
             <div className="sidebar-header">
                 <h3><img src="images/logo.jpg" width="200" height="70" className="d-inline-block align-top" alt=""/></h3>
-                <strong>THI</strong>
+                {/* <strong>THI</strong> */}
+                <strong><img src="images/logo2.jpg" width="50" height="60" className="d-inline-block align-top" alt=""/></strong>
             </div>
 
             <ul className="list-unstyled components">
