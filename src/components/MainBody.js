@@ -24,11 +24,15 @@ function MainBody() {
         getProperties()
     }, [])
 
+    function handleSearch(value){
+        setFilterText(value);
+    }
+
     function SearchBar({ filterText }) {
         return (
             <div className="input-group justify-content-center">
                 <div className="form-outline">
-                    <input type="search" id="form1" value={filterText} onChange={(e) => setFilterText(e.target.value)} className="form-control" placeholder="Search for Property" />
+                    <input type="text" id="form1" value={filterText} onChange={(e) => handleSearch(e.target.value)} className="form-control" placeholder="Search for Property" />
                 </div>
             </div>
         );
@@ -42,7 +46,9 @@ function MainBody() {
             <br></br>
             <SearchBar filterText={filterText}></SearchBar>
             <br></br>
+            
             {properties && <Properties properties={properties} filterText={filterText}></Properties>}
+            
         </div>
 
     );
