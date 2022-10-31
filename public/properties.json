@@ -59,5 +59,20 @@
     "city": "Kissimmee",
     "state": "Florida",
     "dateAvailability": "Oct 27 - Nov 19"
+  },
+  {
+    "id": "5",
+    "imgSource": "images/property6.jpg",
+    "title": "Eagle's Den Suites",
+    "description": "Set in a low-rise building along Route 281, this unpretentious all-suite hotel is 2 miles from Tips Park, 4 miles from Interstate 37 and 11 miles from Choke Canyon State Park.",
+    "nightlyFee": "78",
+    "serviceFee": "13",
+    "cleaningFee": "7",
+    "amenities": "Beach House, Spa, Pool, Free wifi, Sauna, water activities.",
+    "bedrooms": "1",
+    "guests": "2",
+    "city": "Three Rivers",
+    "state": "Texas",
+    "dateAvailability": "Nov 17 - Nov 25"
   }
 ]
