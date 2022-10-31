@@ -66,7 +66,11 @@ const Properties = ({ properties, filterText }) => {
                                 <div className="card">
                                     <img src={property.imgSource} className="card-img-top" alt="..." />
                                     <div className="card-body">
-                                        <h5 className="card-title">{property.title}</h5>
+                                        <div className='row'>
+                                        <h5 className="card-title col-md-9">{property.title}</h5>
+                                        <i class="bi bi-star col-md-3 card-star">  {property.rating}</i>
+                                        
+                                        </div>
                                         <br></br>
                                         <p className="card-text"><b>Location -</b> {property.city}, {property.state}</p>
                                         <p className="card-text"><b>Rates from -</b> {property.nightlyFee}$ per night.</p>
@@ -87,7 +91,7 @@ const Properties = ({ properties, filterText }) => {
                     }
 
 
-
+                    
 
                 }
                 )}
