@@ -293,7 +293,7 @@ a.article:hover {
 }
 
 .card-grid {
-    /* padding: 1%; */
+    padding: 1%;
     box-shadow: 20%;
     width: 50%;
 }
