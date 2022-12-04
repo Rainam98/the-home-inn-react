@@ -21,7 +21,8 @@
       "$numberLong": "1671494400000"
     }
   },
-  "numberOfGuests": 2
+  "numberOfGuests": 2,
+  "isActive":true
 },{
   "_id": {
     "$oid": "636683d6dd45f7b7e8762829"
@@ -45,7 +46,8 @@
       "$numberLong": "1668902400000"
     }
   },
-  "numberOfGuests": 4
+  "numberOfGuests": 4,
+  "isActive":true
 },{
   "_id": {
     "$oid": "636683d6dd45f7b7e8762816"
@@ -69,5 +71,6 @@
       "$numberLong": "1655683200000"
     }
   },
-  "numberOfGuests": 6
+  "numberOfGuests": 6,
+  "isActive":true
 }]

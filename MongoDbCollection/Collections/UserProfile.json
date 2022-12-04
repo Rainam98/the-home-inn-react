@@ -12,7 +12,8 @@
       "$numberLong": "1669420800000"
     }
   },
-  "password": "1296"
+  "password": "1296",
+  "isHost":false
 },{
   "_id": {
     "$oid": "6365bb10dd45f7b7e8762184"
@@ -27,7 +28,8 @@
       "$numberLong": "1669593600000"
     }
   },
-  "password": "1782"
+  "password": "1782",
+  "isHost":false
 },{
   "_id": {
     "$oid": "6365bb94dd45f7b7e8762187"
@@ -38,7 +40,8 @@
   "mobileNo": "4816982571",
   "gender": "male",
   "dob": "2022-12-26",
-  "password": "857"
+  "password": "857",
+  "isHost":false
 },{
   "_id": {
     "$oid": "6365bbe3dd45f7b7e8762138"
@@ -49,7 +52,8 @@
   "mobileNo": "8712569871",
   "gender": "female",
   "dob": "2022-09-26",
-  "password": "4789"
+  "password": "4789",
+  "isHost":false
 },{
   "_id": {
     "$oid": "6365c026dd45f7b7e8762871"
@@ -60,5 +64,6 @@
   "mobileNo": "2874198659",
   "gender": "female",
   "dob": "2022-08-26",
-  "password": "1483"
+  "password": "1483",
+  "isHost":true
 }]
