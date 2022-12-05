@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "096bbfea-536e-4b38-9182-2a9cec0f091b",
+		"_postman_id": "55ecd69e-1b0e-4cfe-9df6-f101897fd421",
 		"name": "WPL Final Project",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5977933"
 	},
 	"item": [
@@ -14,7 +14,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:9000/properties"
+						"url": {
+							"raw": "http://localhost:9000/properties",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"properties"
+							]
+						}
 					},
 					"response": []
 				},
@@ -23,7 +33,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:9000/properties/63667a9add45f7b7e8762148"
+						"url": {
+							"raw": "http://localhost:9000/properties/63667a9add45f7b7e8762148",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"properties",
+								"63667a9add45f7b7e8762148"
+							]
+						}
 					},
 					"response": []
 				},
@@ -41,7 +62,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:9000/properties"
+						"url": {
+							"raw": "http://localhost:9000/properties",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"properties"
+							]
+						}
 					},
 					"response": []
 				},
@@ -59,7 +90,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:9000/properties/637a89ba96a355c8b316f5bb"
+						"url": {
+							"raw": "http://localhost:9000/properties/637a89ba96a355c8b316f5bb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"properties",
+								"637a89ba96a355c8b316f5bb"
+							]
+						}
 					},
 					"response": []
 				},
@@ -68,7 +110,18 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:9000/properties/637a89ba96a355c8b316f5bb"
+						"url": {
+							"raw": "http://localhost:9000/properties/637a89ba96a355c8b316f5bb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"properties",
+								"637a89ba96a355c8b316f5bb"
+							]
+						}
 					},
 					"response": []
 				}
@@ -82,7 +135,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:9000/reservations/636683d6dd45f7b7e8762172"
+						"url": {
+							"raw": "http://localhost:9000/reservations/636683d6dd45f7b7e8762172",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"reservations",
+								"636683d6dd45f7b7e8762172"
+							]
+						}
 					},
 					"response": []
 				},
@@ -125,7 +189,18 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:9000/reservations/637a933c7f270bc61bec8b43"
+						"url": {
+							"raw": "http://localhost:9000/reservations/637a933c7f270bc61bec8b43",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"reservations",
+								"637a933c7f270bc61bec8b43"
+							]
+						}
 					},
 					"response": []
 				},
@@ -163,7 +238,27 @@
 					"name": "user sign up",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"firstName\": \"CHRIS\",\r\n  \"lastName\": \"West\",\r\n  \"emailId\": \"chris@gmail.com\",\r\n  \"mobileNo\": \"6878187457\",\r\n  \"gender\": \"male\",\r\n  \"dob\": \"2022-11-20T19:44:27.336Z\",\r\n  \"password\": \"8754\",\r\n  \"isHost\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/usersignup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"usersignup"
+							]
+						}
 					},
 					"response": []
 				},
@@ -171,7 +266,27 @@
 					"name": "login",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailId\": \"rakshitha@gmail.com\",\r\n    \"password\" : \"7894\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
@@ -179,7 +294,27 @@
 					"name": "host sign up",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\" : \"638cd2c9af5f769f6a40b206\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/hostsignup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"hostsignup"
+							]
+						}
 					},
 					"response": []
 				}
