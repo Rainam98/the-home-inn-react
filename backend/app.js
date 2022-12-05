@@ -15,11 +15,23 @@ con.on('open', () =>{
     console.log('connected to mongodb...')
 })
 
+
+app.use(express.json())
 const propertiesRouter = require('./routes/properties')
 app.use('/properties', propertiesRouter)
 
 const reservationRouter = require('./routes/reservations')
 app.use('/reservations', reservationRouter)
+
+
+const userRouter = require('./routes/usersignup')
+app.use('/usersignup', userRouter)
+
+const loginRouter = require('./routes/login')
+app.use('/login', loginRouter)
+
+const hostsignuprouter = require('./routes/hostsignup')
+app.use('/hostsignup', hostsignuprouter)
 
 
 
