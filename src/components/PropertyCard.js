@@ -4,6 +4,7 @@ import React, { useState } from "react";
 const PropertyCard = ({property}) => {
 
     const [showDetails, setShowDetails] = useState(false);
+    const [favorite, setFavorite] = useState(false);
 
 
     function handleMoreDetails() {
@@ -12,18 +13,24 @@ const PropertyCard = ({property}) => {
         
     }
 
+    function handleFavorites() {
+
+        setFavorite(!favorite);
+        
+    }
+
     return (
         <div className="col-md-4">
             <div className="card">
-                <img src={property.imgSource} className="card-img-top" alt="..." />
+                <img src={property.imgSrc} className="card-img-top" alt="..." />
                 <div className="card-body">
-                    <div className='row'>
-                    <h5 className="card-title col-md-9">{property.title}</h5>
-                    <i className="bi bi-star col-md-3 card-star">  {property.rating}</i>
+                    {/* <div className='row'> */}
+                    <h5 className="card-title">{property.title}</h5>
+                    {/* <i className="bi bi-star col-md-3 card-star">{property.rating}</i> */}
                     
-                    </div>
+                    {/* </div> */}
                     <br></br>
-                    <p className="card-text"><b>Location -</b> {property.city}, {property.state}</p>
+                    <p className="card-text"><b>Location -</b> {property.address.city}, {property.address.state}</p>
                     <p className="card-text"><b>Rates from -</b> {property.nightlyFee}$ per night.</p>
                     <p className="card-text"><b>Accommodates - </b> {property.guests} guests</p>
                     {(showDetails) ? <p className="card-text"><b>No. of Bedrooms - </b> {property.bedrooms}</p> : null}
@@ -33,7 +40,14 @@ const PropertyCard = ({property}) => {
                     {(showDetails) ? <p className="card-text"><b>Service Fees - </b> {property.serviceFee}$ per night</p> : null}
                     {(showDetails) ? <p className="card-text"><b>Cleaning Fees - </b> {property.cleaningFee}$ per night</p> : null}
 
-                    <button onClick={() => handleMoreDetails()} className=" btn">More Details</button>
+                    <div className='d-flex'>
+                    <button onClick={() => handleMoreDetails()} className="btn mx-auto">More Details</button>
+                    </div>
+                    <br></br>
+                    <div className='d-flex'>
+                    {(favorite) ? <button onClick={() => handleFavorites()} className="btn mx-auto">Remove from Favorites</button> :
+                    <button onClick={() => handleFavorites()} className="btn mx-auto">Add To Favorites</button>}
+                    </div>
                 </div>
             </div>
         </div>

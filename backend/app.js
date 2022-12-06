@@ -3,7 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
+
+bodyParser = require("body-parser");
 const url ='mongodb://localhost/HomeInn'
 mongoose.connect(url, {useNewUrlParser:true})
 const con = mongoose.connection
@@ -16,6 +19,9 @@ con.on('open', () =>{
 })
 
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use(express.json())
 const propertiesRouter = require('./routes/properties')
 app.use('/properties', propertiesRouter)
@@ -24,11 +30,14 @@ const reservationRouter = require('./routes/reservations')
 app.use('/reservations', reservationRouter)
 
 
-const userRouter = require('./routes/usersignup')
-app.use('/usersignup', userRouter)
+// const userRouter = require('./routes/usersignup')
+// app.use('/usersignup', userRouter)
 
-const loginRouter = require('./routes/login')
-app.use('/login', loginRouter)
+const userRouter = require('./routes/user')
+app.use('/user', userRouter)
+
+// const loginRouter = require('./routes/login')
+// app.use('/login', loginRouter)
 
 const hostsignuprouter = require('./routes/hostsignup')
 app.use('/hostsignup', hostsignuprouter)
@@ -42,7 +51,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

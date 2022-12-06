@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
+const salt = 10
 
 
 const userSchema = new mongoose.Schema({
@@ -43,4 +45,4 @@ const userSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Userprofile',userSchema)
+module.exports = mongoose.model('Userprofile', userSchema)

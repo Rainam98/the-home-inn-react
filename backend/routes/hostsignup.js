@@ -20,10 +20,10 @@ router.post('/', async (req, res) => {
         user.isHost= true
         await user.save()
         console.log("User updated with id : " + req.body.userId);
-        res.send("User added as host")  
+        res.json({message:"User added as host"})  
       
       } catch (err) {
-        res.send("No user found with id : " + req.body.userId)
+        res.json({message:"No user found with id : " + req.body.userId})
       }
 })
 
