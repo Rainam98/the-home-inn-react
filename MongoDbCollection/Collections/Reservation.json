@@ -22,7 +22,7 @@
     }
   },
   "numberOfGuests": 2,
-  "isActive":true
+  "isActive": true
 },{
   "_id": {
     "$oid": "636683d6dd45f7b7e8762829"
@@ -47,7 +47,7 @@
     }
   },
   "numberOfGuests": 4,
-  "isActive":true
+  "isActive": true
 },{
   "_id": {
     "$oid": "636683d6dd45f7b7e8762816"
@@ -72,5 +72,5 @@
     }
   },
   "numberOfGuests": 6,
-  "isActive":true
+  "isActive": true
 }]
