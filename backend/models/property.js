@@ -52,9 +52,23 @@ const propertiesSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    address: {
-        type: Object,
+    propertyType:{
+        type: String,
         required: true
+    },
+    address: {
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        country: {
+            type: String,
+            required: true
+        }
     }
 
 })

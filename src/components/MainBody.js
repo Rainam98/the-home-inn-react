@@ -26,14 +26,29 @@ function MainBody() {
     }, [])
 
     function handleSearch(value){
-        // setFilterText(value);
+        setFilterText(value)
+        const queryString = `searchParam=${value}`
+        const getProperties = () => {
+            fetch(`searchProperty?${queryString}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },                
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    setProperties(data);
+                });
+        }
+
+        getProperties()
     }
 
     function SearchBar({ filterText }) {
         return (
             <div className="input-group justify-content-center">
                 <div className="form-outline">
-                    <input type="text" id="form1" value={filterText} onChange={(e) => handleSearch(e.target.value)} className="form-control" placeholder="Search for Property" />
+                    <input type="text" id="form1" value={filterText} onChange={(e) => handleSearch(e.target.value)} className="form-control" placeholder="Search Property by city and/or property type" />
                 </div>
             </div>
         );

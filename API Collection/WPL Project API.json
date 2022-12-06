@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "55ecd69e-1b0e-4cfe-9df6-f101897fd421",
+		"_postman_id": "0832f340-f52c-4b31-8564-3a7ce49ad307",
 		"name": "WPL Final Project",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "5977933"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -55,7 +54,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \r\n  \"imgSrc\": \"property14.png\",\r\n  \"title\":\"req.body.title\",\r\n  \"description\": \"req.body.description\",\r\n  \"nightlyFee\": 1,\r\n  \"serviceFee\": 1,\r\n  \"cleaningFee\": 1,\r\n  \"amenities\": \"req.body.amenities\",\r\n  \"bedRooms\": 1,\r\n  \"guests\": 1,\r\n  \"availabilityFrom\": \"2022-11-20T19:44:27.336Z\",\r\n  \"availabilityTo\": \"2022-11-20T19:44:27.336Z\",\r\n  \"propertyType\": \"beach house\",\r\n  \"hostId\": 1,\r\n  \"address\": {\r\n      \"city\": \"worley\",\r\n      \"state\": \"idaho\",\r\n      \"country\": \"us\"\r\n  }\r\n}",
+							"raw": "{ \r\n  \"imgSrc\": \"req.body.imgSrc\",\r\n  \"title\":\"req.body.title\",\r\n  \"description\": \"req.body.description\",\r\n  \"nightlyFee\": 1,\r\n  \"serviceFee\": 1,\r\n  \"cleaningFee\": 1,\r\n  \"amenities\": \"req.body.amenities\",\r\n  \"bedRooms\": 1,\r\n  \"guests\": 1,\r\n  \"availabilityFrom\": \"2022-11-20T19:44:27.336Z\",\r\n  \"availabilityTo\": \"2022-11-20T19:44:27.336Z\",\r\n  \"hostId\": 1,\r\n  \"address\": \"req.body.address\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -120,6 +119,31 @@
 							"path": [
 								"properties",
 								"637a89ba96a355c8b316f5bb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchProperty",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/searchproperty?searchParam=mansion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"searchproperty"
+							],
+							"query": [
+								{
+									"key": "searchParam",
+									"value": "mansion"
+								}
 							]
 						}
 					},
@@ -241,7 +265,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n  \"firstName\": \"CHRIS\",\r\n  \"lastName\": \"West\",\r\n  \"emailId\": \"chris@gmail.com\",\r\n  \"mobileNo\": \"6878187457\",\r\n  \"gender\": \"male\",\r\n  \"dob\": \"2022-11-20T19:44:27.336Z\",\r\n  \"password\": \"8754\",\r\n  \"isHost\": true\r\n}",
+							"raw": "{\r\n  \"firstName\": \"Rainam\",\r\n  \"lastName\": \"Shah\",\r\n  \"emailId\": \"rainam@gmail.com\",\r\n  \"mobileNo\": \"6878187457\",\r\n  \"gender\": \"male\",\r\n  \"dob\": \"2022-11-20T19:44:27.336Z\",\r\n  \"password\": \"1798\",\r\n  \"isHost\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -249,14 +273,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/usersignup",
+							"raw": "http://localhost:9000/user/signup",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "9000",
 							"path": [
-								"usersignup"
+								"user",
+								"signup"
 							]
 						}
 					},
@@ -269,7 +294,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"emailId\": \"rakshitha@gmail.com\",\r\n    \"password\" : \"7894\"\r\n}",
+							"raw": "{\r\n    \"emailId\": \"rainam@gmail.com\",\r\n    \"password\" : \"1798\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -277,13 +302,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9000/login",
+							"raw": "http://localhost:9000/user/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "9000",
 							"path": [
+								"user",
 								"login"
 							]
 						}
