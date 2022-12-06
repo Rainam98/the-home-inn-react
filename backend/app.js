@@ -33,6 +33,8 @@ app.use('/login', loginRouter)
 const hostsignuprouter = require('./routes/hostsignup')
 app.use('/hostsignup', hostsignuprouter)
 
+const searchparamrouter = require('./routes/searchpropertyqueryparam')
+app.use('/searchproperty', searchparamrouter)
 
 
 app.use(logger('dev'));

@@ -55,7 +55,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \r\n  \"imgSrc\": \"req.body.imgSrc\",\r\n  \"title\":\"req.body.title\",\r\n  \"description\": \"req.body.description\",\r\n  \"nightlyFee\": 1,\r\n  \"serviceFee\": 1,\r\n  \"cleaningFee\": 1,\r\n  \"amenities\": \"req.body.amenities\",\r\n  \"bedRooms\": 1,\r\n  \"guests\": 1,\r\n  \"availabilityFrom\": \"2022-11-20T19:44:27.336Z\",\r\n  \"availabilityTo\": \"2022-11-20T19:44:27.336Z\",\r\n  \"hostId\": 1,\r\n  \"address\": \"req.body.address\"\r\n}",
+							"raw": "{ \r\n  \"imgSrc\": \"property14.png\",\r\n  \"title\":\"req.body.title\",\r\n  \"description\": \"req.body.description\",\r\n  \"nightlyFee\": 1,\r\n  \"serviceFee\": 1,\r\n  \"cleaningFee\": 1,\r\n  \"amenities\": \"req.body.amenities\",\r\n  \"bedRooms\": 1,\r\n  \"guests\": 1,\r\n  \"availabilityFrom\": \"2022-11-20T19:44:27.336Z\",\r\n  \"availabilityTo\": \"2022-11-20T19:44:27.336Z\",\r\n  \"propertyType\": \"beach house\",\r\n  \"hostId\": 1,\r\n  \"address\": {\r\n      \"city\": \"worley\",\r\n      \"state\": \"idaho\",\r\n      \"country\": \"us\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
