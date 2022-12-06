@@ -5,12 +5,27 @@ const Property = require('../models/property')
 
 
 
-
+// API for searching property based on city and/or type
+// Eg request : GET http://localhost:9000/searchproperty/?searchParam=worley
 router.get('/', async (req, res) => {
     try {
-        var re = new RegExp(req.params.searchParam, 'i');
+        var re = new RegExp(req.query.searchParam);
         console.log(re)
-        const property = await Property.find( [{ city: { $regex: re } }, {title:{ $regex: re}}])
+        const property = await Property.find({$or: [
+          {
+            propertyType: {
+              $regex: req.query.searchParam,
+              $options: "i"
+            }
+            
+          },{
+            'address.city': {
+              $regex: req.query.searchParam,
+              $options: "i"
+            }
+          }
+          ]});
+        console.log(property)
         res.send(property)  
       
       } catch (err) {
