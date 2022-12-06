@@ -2,6 +2,10 @@ import '../main.css';
 function Header() {
     let url = " ";
 
+    function handleSignout(){
+        localStorage.removeItem("user");
+        localStorage.removeItem("isHost");
+    }
 
     return (
         <header>
@@ -23,9 +27,6 @@ function Header() {
                         <li className="nav-item">
                             <a className="nav-link" href={url}>Contact</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href={url}> Favourites</a>
-                        </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href={url} id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,8 +34,8 @@ function Header() {
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a className="dropdown-item" href={url}>My Profile</a></li>
-                                <li><a className="dropdown-item" href={url}>Login/Sign Up</a></li>
-                                <li><a className="dropdown-item" href={url}>Sign Out</a></li>
+                                {/* <li><a className="dropdown-item" href={url}>Login/Sign Up</a></li> */}
+                                <li><a className="dropdown-item" onClick={handleSignout} href="/">Sign Out</a></li>
                             </ul>
                         </li>
                     </ul>

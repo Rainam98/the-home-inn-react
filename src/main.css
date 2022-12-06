@@ -299,6 +299,10 @@ a.article:hover {
     height: 160px;
 }
 
+.card-body{
+    justify-content: center;
+}
+
 .card-grid {
     padding: 1%;
     box-shadow: 20%;
@@ -315,6 +319,7 @@ a.article:hover {
 
 .card-text {
     color: #ed590f;
+    justify-content: center;
 }
 
 .card-title {
@@ -354,6 +359,16 @@ footer {
     margin-right: 1.5%;
     margin-top: 3%;
     margin-bottom: 1%;
+}
+
+/* ---------------------------------------------------
+    LOGIN
+----------------------------------------------------- */
+
+.error{
+    color: red;
+    text-align: center;
+    margin: 2px;
 }
 
 /* ---------------------------------------------------
@@ -429,3 +444,4 @@ footer {
     }
 
 }
+

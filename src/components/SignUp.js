@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate} from 'react-router-dom';
 
 function SignUp() {
+
+  const [error, setError] = useState(false);
+  // let history = useHistory();
+  const navigate = useNavigate();
   const [inputValues, setInputValue] = useState({
     fName: "",
     lName: "",
@@ -10,6 +15,7 @@ function SignUp() {
     dob: "",
     password: "",
     confirmPassword: "",
+    isHost:false,
   });
 
   const [validation, setValidation] = useState({
@@ -52,7 +58,7 @@ function SignUp() {
     if (!inputValues.email.trim()) {
       errors.email = "This field is required";
     } else if (!inputValues.email.match(emailCond)) {
-      errors.email = "Please ingress a valid email address";
+      errors.email = "Please input a valid email address";
     } else {
       errors.email = "";
     }
@@ -119,12 +125,34 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const input = { firstName:inputValues.fName, lastName:inputValues.lName, gender:inputValues.gender, dob:inputValues.dob,
+      password:inputValues.password, emailId:inputValues.email, mobileNo:inputValues.phone, isHost: inputValues.isHost };
+      fetch("usersignup", {
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+          }, 
+          body : JSON.stringify(input),
+          method: 'POST'
+      })
+          .then(res => res.json())
+          .then((data) => {
+            if(data === "There was an issue adding the user. Please try again later!!"){
+                setError(true);
+            }else{
+                localStorage.setItem("user", data);
+                localStorage.setItem("isHost", data.isHost);
+                setError(false)
+                navigate("/home");
+            }
+          });
   };
 
   return (
     <div>
       <div className="sign-up-form">
         <form id="registrationForm" action="/" method="POST" onSubmit={handleSubmit}>
+        {(error) === true ? <h2 className="error">There was some error in signup. Please try again</h2> : null }
           <div className="form-control">
             <label>First Name</label>
             <input
@@ -235,7 +263,7 @@ function SignUp() {
             />
           </div>
 
-          <input type="checkbox" name="becomehost" value="becomehost"></input>
+          <input type="checkbox" name="becomehost" value={inputValues.isHost}  onChange={(e) => handleChange(e)}></input>
           <label>Become a host</label>
 
           <button type="submit" id="submit-button">
@@ -243,7 +271,7 @@ function SignUp() {
           </button>
           
           <span className="form-input-login">
-            Already have an account? Login <a href="#">here</a>
+            Already have an account? Login <a href="/">here</a>
           </span>
 
         </form>

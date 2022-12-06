@@ -12,7 +12,7 @@ router.get('/:id', async(req,res)=>{
     res.json(reservation)
 
   }catch(err){
-    res.send("Reservation not found for reservation id : " +req.params.id )
+    res.json({message:"Reservation not found for reservation id : " +req.params.id})
     console.log(err)
   }
 })
@@ -45,7 +45,7 @@ router.post('/', async(req,res)=>{
      console.log("New Reservation done!!");
      res.json(addedReservation)
   }catch(err){
-      res.send("There was an issue reserving the property. Please try again later!!")
+      res.json({message:"There was an issue reserving the property. Please try again later!!"})
       console.log(err)
   }
 })
@@ -58,7 +58,7 @@ router.delete('/:id', async(req, res)=>{
     const reservation =await Reservation.findByIdAndDelete(req.params.id)
     res.json('Reservation deleted with id : '+ req.params.id);
   }catch(err){
-      res.send('There was an issue deleting the reservation with id : '+ req.params.id)
+      res.json({message:'There was an issue deleting the reservation with id : '+ req.params.id})
       console.log(err)
   }
 })
@@ -73,7 +73,7 @@ router.get('/', params= async(req,res)=>{
     res.json(allReservations)
 
   }catch(err){
-    res.send("No reservations found for user with id : "+req.query.userId)
+    res.json({message:"No reservations found for user with id : "+req.query.userId})
   }
 })
 

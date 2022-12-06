@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     console.log("All properties fetched")
 
   } catch (err) {
-    res.send('Error' + err)
+    res.json({message:'Error' + err})
   }
 })
 
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
     res.json(property)
 
   } catch (err) {
-    res.send("No Property found with id : " + req.params.id)
+    res.json({message:"No Property found with id : " + req.params.id})
   }
 })
 
@@ -41,7 +41,7 @@ router.delete('/:id', async (req, res) => {
     const property = await Property.findByIdAndDelete(req.params.id)
     res.json('Property deleted with id : ' + req.params.id);
   } catch (err) {
-    res.send('There was an issue deleting the property with id : ' + req.params.id)
+    res.json({message:'There was an issue deleting the property with id : ' + req.params.id})
   }
 })
 
@@ -89,7 +89,7 @@ router.post('/', async (req, res) => {
     console.log("New Property Added!!");
     res.json(addedProperty)
   } catch (err) {
-    res.send("There was an issue adding the property. Please try again later!!")
+    res.json({message:"There was an issue adding the property. Please try again later!!"})
   }
 })
 
@@ -171,11 +171,11 @@ router.patch("/:id", async (req, res) => {
 
     await property.save()
     console.log("Property updated with id : " + req.params.id);
-    res.send(property)
+    res.json(property)
 
   } catch {
     res.status(404)
-    res.send("Property update failed for id : " + req.params.id)
+    res.json({message:"Property update failed for id : " + req.params.id})
   }
 })
 

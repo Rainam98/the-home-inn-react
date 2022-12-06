@@ -9,7 +9,7 @@ function MainBody() {
 
     useEffect(() => {
         const getProperties = () => {
-            fetch("properties.json", {
+            fetch("properties", {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
