@@ -299,7 +299,7 @@ a.article:hover {
     height: 160px;
 }
 
-.card-body{
+.card-body {
     justify-content: center;
 }
 
@@ -365,10 +365,9 @@ footer {
     LOGIN
 ----------------------------------------------------- */
 
-.error{
+.error {
     color: red;
-    text-align: center;
-    margin: 2px;
+    margin-bottom: 5px;
 }
 
 /* ---------------------------------------------------
@@ -445,3 +444,29 @@ footer {
 
 }
 
+/* ---------------------------------------------------
+   LOGIN FORM
+----------------------------------------------------- */
+
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.loginButton {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
