@@ -10,22 +10,22 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const input = { emailId: email, password: pass};
+        const input = { emailId: email, password: pass };
         fetch("user/login", {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            }, 
-            body : JSON.stringify(input),
+            },
+            body: JSON.stringify(input),
             method: 'POST'
         })
             .then(res => {
-                console.log(res.ok)
-                if(!res.ok){
+                
+                if (!res.ok) {
                     setError(true);
                     setEmail('');
                     setPass('');
-                }else{
+                } else {
                     return res.json()
                 }
             })
@@ -40,19 +40,44 @@ function Login() {
     }
 
     return (
-        <div className="login-container" onSubmit={handleSubmit}>
-            {(error) === true ? <h2 className="error">You have entered wrong credentials</h2> : null }
-            <h2>Login</h2>
-            <form className="login-form">
-                <label>Email ID</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="email@gmail.com" name="email" />
-                <label>Password</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" name="password" />
-                <p> Not a User ? <span><Link to="/signup"><label>SignUp</label></Link></span> </p>
-                <br></br>
-                <button type="submit">Log In</button>
-            </form>
-        </div>
+
+        <section className="vh-100">
+            <div className="container-fluid h-custom">
+                <div className="row d-flex justify-content-center align-items-center h-100">
+                    <div className="col-md-9 col-lg-6 col-xl-5">
+                        <img src="images/logo.jpg"
+                            className="img-fluid" alt="Sample image" />
+                    </div>
+                    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <form onSubmit={handleSubmit} >
+
+
+                        {(error) === true ? <h4 className="error">You have entered wrong credentials</h4> : null }
+                            <div className="form-group mb-4 mt-4">
+                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" className="form-control form-control-lg"
+                                    placeholder="Enter a valid email address" />
+
+                            </div>
+
+
+                            <div className="form-group mb-3">
+                                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" name="password" className="form-control form-control-lg"
+                                    placeholder="Enter password" />
+
+                            </div>
+                            
+                                <div className="text-lg-start mt-4 pt-2">
+                                    <button type="submit" className="btn loginButton">Login</button>
+                                    <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/signup"
+                                        className="link-success">Signup</a></p>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        
     );
 }
 
