@@ -8,7 +8,7 @@ const User = require('../models/user')
 
 
 // API for when user wishes to join as host  .
-// Eg request : POST http://localhost:9000/login/
+// Eg request : POST http://localhost:9000/hostsignup/
 
 
 
@@ -20,10 +20,10 @@ router.post('/', async (req, res) => {
         user.isHost= true
         await user.save()
         console.log("User updated with id : " + req.body.userId);
-        res.json({message:"User added as host"})  
+        res.status(200).json({isHost:"true"})  
       
       } catch (err) {
-        res.json({message:"No user found with id : " + req.body.userId})
+        res.status(404).json({message:"No user found with id : " + req.body.userId})
       }
 })
 

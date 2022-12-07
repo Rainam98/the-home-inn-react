@@ -1,22 +1,36 @@
 import '../main.css';
 import React, { useState } from "react";
+import { useNavigate} from 'react-router-dom';
 
-const PropertyCard = ({property}) => {
+
+const PropertyCard = ({ property }) => {
 
     const [showDetails, setShowDetails] = useState(false);
     const [favorite, setFavorite] = useState(false);
-
+    const navigate = useNavigate();
 
     function handleMoreDetails() {
 
         setShowDetails(!showDetails);
-        
+
     }
 
-    function handleFavorites() {
+    function handleAddFavorites() {
 
-        setFavorite(!favorite);
-        
+        setFavorite(true);
+
+
+    }
+    function handleRemoveFavorites() {
+
+        setFavorite(false);
+    }
+
+    function handleRating() {
+       
+        localStorage.setItem("ratePropertyTitle", property.title);
+        localStorage.setItem("ratePropertyImage", property.imgSrc);
+        navigate("/rateproperty")
     }
 
     return (
@@ -27,7 +41,7 @@ const PropertyCard = ({property}) => {
                     {/* <div className='row'> */}
                     <h5 className="card-title">{property.title}</h5>
                     {/* <i className="bi bi-star col-md-3 card-star">{property.rating}</i> */}
-                    
+
                     {/* </div> */}
                     <br></br>
                     <p className="card-text"><b>Location -</b> {property.address.city}, {property.address.state}</p>
@@ -42,13 +56,29 @@ const PropertyCard = ({property}) => {
                     {(showDetails) ? <p className="card-text"><b>Cleaning Fees - </b> {property.cleaningFee}$ per night</p> : null}
 
                     <div className='d-flex'>
+
+                        <button onClick={() => handleMoreDetails()} className="btn mx-auto">More Details</button>
+                    </div>
+                    <br></br>
+                    <div className='d-flex'>
+                        {(favorite) ? <button onClick={() => handleRemoveFavorites()} className="btn mx-auto">Remove from Favorites</button> :
+                            <button onClick={() => handleAddFavorites()} className="btn mx-auto">Add To Favorites</button>}
+                    </div>
+                    <br></br>
+                    <div className='d-flex'>
+                        <button onClick={() => handleRating()} className="btn mx-auto">Rate Property</button>
+                    </div>
+
+
+
+                    {/* <div className='d-flex'>
                     <button onClick={() => handleMoreDetails()} className="btn mx-auto">More Details</button>
                     </div>
                     <br></br>
                     <div className='d-flex'>
-                    {(favorite) ? <button onClick={() => handleFavorites()} className="btn mx-auto">Remove from Favorites</button> :
-                    <button onClick={() => handleFavorites()} className="btn mx-auto">Add To Favorites</button>}
-                    </div>
+                    {(favorite) ? <button onClick={() => handleRemoveFavorites({property})} className="btn mx-auto">Remove from Favorites</button> :
+                    <button onClick={() => handleAddFavorites({property})} className="btn mx-auto">Add To Favorites</button>}
+                    </div> */}
                 </div>
             </div>
         </div>

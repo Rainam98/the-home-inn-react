@@ -22,7 +22,7 @@ function Header() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="nav navbar-nav justify-content-end ml-auto">
                         <li className="nav-item">
-                            <a className="nav-link active" href={url}>Home</a>
+                            <a className="nav-link active" href='/home'>Home</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href={url}>Contact</a>
