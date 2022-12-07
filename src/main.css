@@ -492,7 +492,6 @@ footer {
     font-size: 12px;
   }
 
-
 /* ---------------------------------------------------
    ADD PROPERTY PAGE
 ----------------------------------------------------- */
@@ -512,4 +511,57 @@ footer {
     font-size: 10px;
     color: red;
     font-family: 'Times New Roman', Times, serif;
+}
+
+/* ---------------------------------------------------
+   ADD PROPERTY PAGE
+----------------------------------------------------- */
+.hostacceptButton{
+    padding-left: 6.5rem;
+    padding-right: 6.5rem;
+    margin-left: 9%;
+}
+
+.hostdeclineButton{
+    padding-left: 6.5rem;
+    padding-right: 6.5rem;
+}
+
+.btn-outline-success{
+    color: green;
+    border-color: green;
+    background-color: white;
+}
+
+.btn-outline-success:hover{
+    color: white;
+    border-color: green;
+    background-color: green;
+}
+
+.btn-outline-danger{
+    color: red;
+    border-color: red;
+    background-color: white;   
+}
+
+.btn-outline-danger:hover{
+    color: white;
+    border-color: red;
+    background-color: red;   
+}
+
+.hostcontainer{
+    margin: 20% 25% 2% 20%;
+    padding: 20px 20px 30px 30px;
+    border: 2px #ed590f solid;
+    border-radius: 15px;
+    width: 56%;
+    background-color: #f2f2f2;
+}
+
+.hostpara{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 20px;
 }
