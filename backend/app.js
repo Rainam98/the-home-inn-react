@@ -49,14 +49,9 @@ const reviewrouter = require('./routes/reviews')
 app.use('/review', reviewrouter)
 
 
-const viewfavouritesrouter = require('./routes/viewfavourite')
-app.use('/viewfavourites', viewfavouritesrouter)
+const favouriterouter = require('./routes/favourite')
+app.use('/favourite', favouriterouter)
 
-const addfavouriterouter = require('./routes/addfavourite')
-app.use('/addfavourite', addfavouriterouter)
-
-const removefavouriterouter = require('./routes/removefavourite')
-app.use('/removefavourite', removefavouriterouter)
 
 
 app.use(logger('dev'));
