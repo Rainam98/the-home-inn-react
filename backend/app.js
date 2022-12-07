@@ -49,6 +49,16 @@ const reviewrouter = require('./routes/reviews')
 app.use('/review', reviewrouter)
 
 
+const viewfavouritesrouter = require('./routes/viewfavourite')
+app.use('/viewfavourites', viewfavouritesrouter)
+
+const addfavouriterouter = require('./routes/addfavourite')
+app.use('/addfavourite', addfavouriterouter)
+
+const removefavouriterouter = require('./routes/removefavourite')
+app.use('/removefavourite', removefavouriterouter)
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
