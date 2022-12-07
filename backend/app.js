@@ -49,6 +49,11 @@ const reviewrouter = require('./routes/reviews')
 app.use('/review', reviewrouter)
 
 
+const favouriterouter = require('./routes/favourite')
+app.use('/favourite', favouriterouter)
+
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
