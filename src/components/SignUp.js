@@ -102,6 +102,11 @@ function SignUp() {
           </Form.Field>
           {errors.password && <p className="field-errors">This field is required</p>}
         </div>
+        
+        <input type="checkbox" name="becomeahost"></input>
+        <p className="medium fw-italic mt-2 pt-1 mb-0">
+            Become a host
+        </p>
 
         <div className="text-lg-start mt-4 pt-2">
         <Button type="submit" className="btn loginButton">Sign Up</Button>
