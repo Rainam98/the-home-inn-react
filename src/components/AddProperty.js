@@ -194,7 +194,6 @@ function AddProperty() {
                   type="date"
                   name="availabilityFrom"
                   id="availabilityFrom"
-                  placeholder="Property title"
                   {...register("availabilityFrom", { required: true })}
                 />
               </div>
@@ -215,7 +214,6 @@ function AddProperty() {
                   type="date"
                   name="availabilityTo"
                   id="availabilityTo"
-                  placeholder="Property title"
                   {...register("availabilityTo", { required: true })}
                 />
               </div>

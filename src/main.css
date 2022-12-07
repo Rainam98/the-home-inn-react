@@ -595,3 +595,43 @@ footer {
     font-size: 20px;
 }
 
+<<<<<<< Updated upstream
+=======
+/* ---------------------------------------------------
+   PROPERTY DETAILS PAGE
+----------------------------------------------------- */
+.propertydetailsupdateButton{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-right: 5px;
+}
+
+.propertydetailsdeleteButton{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.btn-outline-warning{
+    color: white;
+    border-color: black;
+    background-color: #267272;
+}
+
+.btn-outline-warning:hover{
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.btn-outline-delete{
+    color: white;
+    border-color: red;
+    background-color: red;
+}
+
+.btn-outline-delete:hover{
+    color: red;
+    border-color: red;
+    background-color: white;
+}
+>>>>>>> Stashed changes
