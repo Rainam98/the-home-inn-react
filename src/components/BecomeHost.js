@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Sidemenu from "./Sidemenu";
 import Header from "./Header";
+import Footer from "./Footer";
 
 function BecomeHost() {
 
@@ -107,6 +108,7 @@ function BecomeHost() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
