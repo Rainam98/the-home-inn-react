@@ -458,7 +458,7 @@ footer {
 
 .h-custom {
     height: calc(100% - 73px);
-}
+}   
 
 @media (max-width: 450px) {
     .h-custom {
@@ -469,4 +469,47 @@ footer {
 .loginButton {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+}
+
+/* ---------------------------------------------------
+   SIGN UP FORM
+----------------------------------------------------- */
+.signup-form{
+    margin-left: 30%;
+}
+
+.signup-form-group{
+    width: 50%;
+}
+.signup-form .img-fluid{
+    width: 50%;
+}
+.link-success{
+    font-style: italic;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    opacity: 1; /* Firefox */
+    font-size: 12px;
+  }
+
+
+/* ---------------------------------------------------
+   ADD PROPERTY PAGE
+----------------------------------------------------- */
+.addproperty{
+    margin: 2% 25% 2% 25%;
+    padding: 20px 0px 20px 50px;
+    border: 2px #ed590f solid;
+    border-radius: 15px;
+    width: 50%;
+}
+
+.form-field{
+    width: 300%;
+}
+
+.field-errors{
+    font-size: 10px;
+    color: red;
+    font-family: 'Times New Roman', Times, serif;
 }
