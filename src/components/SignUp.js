@@ -1,24 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
 import "../main.css";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+
+  const [isHost, setIsHost] = useState(false)
+  const [error, setError] = useState(false)
+
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    
+    
+        const input = { emailId: data.email, password: data.password, firstName: data.firstName, lastName: data.lastName, mobileNo: data.phone, isHost: isHost };
+        fetch("user/signup", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(input),
+            method: 'POST'
+        })
+            .then(res => {
+                
+                if (!res.ok) {
+                    setError(true);
+                } else {
+                    return res.json()
+                }
+            })
+            .then((data) => {
+
+                localStorage.setItem("user", data.email)
+                localStorage.setItem("isHost", data.isHost)
+                setError(false)
+                navigate("/home")
+
+            });
   };
   return (
     <div className="container mt-5 signup-form">
       <img src="images/logo.jpg" className="img-fluid" alt="Logo" />
       <Form onSubmit={handleSubmit(onSubmit)}>
+        
+      {(error) === true ? <h4 className="error">Please Signup Again</h4> : null }
         <div className="form-group mb-2 mt-4 signup-form-group">
           <Form.Field>
-            {/* <label>First Name</label> */}
+            <label>First Name:</label>
             <input
               className="form-control"
               type="text"
@@ -27,12 +61,12 @@ function SignUp() {
               {...register("firstName", { required: true })}
             />
           </Form.Field>
-          {errors.firstName && <p>This field is required</p>}
+          {errors.firstName && <p className="field-errors">This field is required</p>}
         </div>
 
         <div className="form-group mb-2 signup-form-group">
           <Form.Field>
-            {/* <label>Last Name</label> */}
+            <label>Last Name:</label>
             <input
               className="form-control"
               type="text"
@@ -41,26 +75,26 @@ function SignUp() {
               {...register("lastName", { required: true })}
             />
           </Form.Field>
-          {errors.lastName && <p>This field is required</p>}
+          {errors.lastName && <p className="field-errors">This field is required</p>}
         </div>
 
         <div className="form-group mb-2 signup-form-group">
           <Form.Field>
-            {/* <label>Email</label> */}
+            <label>Email:</label>
             <input
               className="form-control"
               type="email"
               name="email"
               placeholder="Email"
-              {...register("email", {required: true, pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,})}
+              {...register("email", { required: true, pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, })}
             />
           </Form.Field>
-          {errors.email && <p>This field is required</p>}
+          {errors.email && <p className="field-errors">This field is required</p>}
         </div>
 
         <div className="form-group mb-2 signup-form-group">
           <Form.Field>
-            {/* <label>Mobie Number</label> */}
+            <label>Mobile Number:</label>
             <input
               className="form-control"
               type="text"
@@ -69,48 +103,41 @@ function SignUp() {
               {...register("phone", { required: true })}
             />
           </Form.Field>
-          {errors.phone && <p>This field is required</p>}
+          {errors.phone && <p className="field-errors">This field is required</p>}
         </div>
-
         <div className="form-group mb-2 signup-form-group">
           <Form.Field>
-            {/* <label>Address</label> */}
-            <input
-              className="form-control"
-              type="text"
-              name="address"
-              placeholder="Address"
-              {...register("address", { required: true })}
-            />
-          </Form.Field>
-          {errors.address && <p>This field is required</p>}
-        </div>
+            <label>Password:</label>
 
-        <div className="form-group mb-2 signup-form-group">
-          <Form.Field>
-            {/* <label>Password</label> */}
             <input
               className="form-control"
               type="password"
               name="password"
+              title="1. Atleast one uppercase letter required.
+                 2. Atleast one lowercase letter required.
+                 3. Atleast one number letter required.
+                 4. Atleast one symbol (#,$,etc) letter required."
               placeholder="Password"
               {...register("password", {
                 required: true,
                 pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
               })}
             />
+
           </Form.Field>
-          {errors.password && <p className="field-errors">This field is required</p>}
+          {errors.password && <p className="field-errors">Please enter valid password</p>}
+        </div>
+
+        <div className="form-group mb-2 signup-form-group">
+          <Form.Field>
+          <input type="checkbox" checked={isHost} onChange={(e) => setIsHost(true)} id="becomeahost" name="isHost"/>
+          <label for="becomeahost" className="medium fw-italic mt-2 pt-1 mb-0 ml-2">Become a host</label>
+          </Form.Field>
         </div>
         
-        <input type="checkbox" name="becomeahost"></input>
-        <p className="medium fw-italic mt-2 pt-1 mb-0">
-            Become a host
-        </p>
-
         <div className="text-lg-start mt-4 pt-2">
-        <Button type="submit" className="btn loginButton">Sign Up</Button>
-        
+          <Button type="submit" className="btn loginButton">Sign Up</Button>
+
           <p className="small fw-bold mt-2 pt-1 mb-0">
             Already have an account?{" "}
             <a href="/" className="link-success">

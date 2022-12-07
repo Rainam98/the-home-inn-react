@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     console.log("All properties fetched")
 
   } catch (err) {
-    res.json({message:'Error' + err})
+    res.json({ message: 'Error' + err })
   }
 })
 
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
     res.json(property)
 
   } catch (err) {
-    res.json({message:"No Property found with id : " + req.params.id})
+    res.json({ message: "No Property found with id : " + req.params.id })
   }
 })
 
@@ -41,7 +41,7 @@ router.delete('/:id', async (req, res) => {
     const property = await Property.findByIdAndDelete(req.params.id)
     res.json('Property deleted with id : ' + req.params.id);
   } catch (err) {
-    res.json({message:'There was an issue deleting the property with id : ' + req.params.id})
+    res.json({ message: 'There was an issue deleting the property with id : ' + req.params.id })
   }
 })
 
@@ -89,7 +89,7 @@ router.post('/', async (req, res) => {
     console.log("New Property Added!!");
     res.json(addedProperty)
   } catch (err) {
-    res.json({message:"There was an issue adding the property. Please try again later!!"})
+    res.json({ message: "There was an issue adding the property. Please try again later!!" })
   }
 })
 
@@ -175,8 +175,33 @@ router.patch("/:id", async (req, res) => {
 
   } catch {
     res.status(404)
-    res.json({message:"Property update failed for id : " + req.params.id})
+    res.json({ message: "Property update failed for id : " + req.params.id })
   }
+})
+
+// API for get property ID from title
+// Eg request : POST http://localhost:9000/properties/title
+/*
+  Body:
+  { 
+    "title": "Sequoia Ridgetop Airbnb"
+  }
+*/
+
+
+router.post('/title', async (req, res) => {
+
+  Property.findOne({ title: req.body.title }).then(property => {
+
+    res.status(200).json({ propertyId: property._id })
+    console.log("Got the property Id")
+
+  })
+    .catch((error) => {
+      console.log(error)
+      res.status(404).json({ message: 'No property found with given title' })
+    })
+
 })
 
 module.exports = router

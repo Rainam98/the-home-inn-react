@@ -13,6 +13,25 @@ body {
     color: white;
 }
 
+.property-image{
+    text-align: center;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.review-form-container{
+    text-align: center;
+    justify-content: center;
+    
+}
+
+.review-form{
+    width: 50%;
+    margin: 0 auto;
+    
+}
+
 a,
 a:hover,
 a:focus {
@@ -370,6 +389,12 @@ footer {
     margin-bottom: 5px;
 }
 
+.success{
+    color: green;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -508,7 +533,7 @@ footer {
 }
 
 .field-errors{
-    font-size: 10px;
+    font-size: 13px;
     color: red;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -525,6 +550,10 @@ footer {
 .hostdeclineButton{
     padding-left: 6.5rem;
     padding-right: 6.5rem;
+}
+
+.btn-toolbar{
+    justify-content: flex-end;
 }
 
 .btn-outline-success{
@@ -565,3 +594,4 @@ footer {
     text-align: center;
     font-size: 20px;
 }
+

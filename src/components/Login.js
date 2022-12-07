@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -31,10 +31,13 @@ function Login() {
             })
             .then((data) => {
 
-                localStorage.setItem("user", data);
+                localStorage.setItem("user", data.emailId);
                 localStorage.setItem("isHost", data.isHost);
                 setError(false)
                 navigate("/home");
+
+                let user = localStorage.getItem("user");
+                console.log(user)
 
             });
     }
@@ -46,16 +49,15 @@ function Login() {
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-9 col-lg-6 col-xl-5">
                         <img src="images/logo.jpg"
-                            className="img-fluid" alt="Sample image" />
+                            className="img-fluid" alt="Seems to be a problem" />
                     </div>
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleSubmit} >
-
+                        <h1 className="text-secondary">Login to your Account</h1>
 
                         {(error) === true ? <h4 className="error">You have entered wrong credentials</h4> : null }
                             <div className="form-group mb-4 mt-4">
-                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" className="form-control form-control-lg"
-                                    placeholder="Enter a valid email address" />
+                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" className="form-control form-control-lg" placeholder="Enter a valid email address" />
 
                             </div>
 

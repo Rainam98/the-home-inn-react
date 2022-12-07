@@ -1,19 +1,18 @@
 import '../main.css';
-import React, { useState } from "react";
+import React from "react";
 import PropertyCard from './PropertyCard'
 
 
 const Properties = ({ properties }) => {
-    
-   
+
+
     return (
 
         <div className='row'>
             {
                 properties.map((property) => {
-                    
-                    return <PropertyCard property={property}></PropertyCard>
 
+                    return <PropertyCard property={property}></PropertyCard>
 
                 }
                 )}

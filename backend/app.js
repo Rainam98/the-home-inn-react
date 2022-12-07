@@ -45,6 +45,9 @@ app.use('/hostsignup', hostsignuprouter)
 const searchparamrouter = require('./routes/searchpropertyqueryparam')
 app.use('/searchproperty', searchparamrouter)
 
+const reviewrouter = require('./routes/reviews')
+app.use('/review', reviewrouter)
+
 
 app.use(logger('dev'));
 app.use(express.json());
