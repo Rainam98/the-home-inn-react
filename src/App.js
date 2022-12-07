@@ -12,6 +12,7 @@ import {
 import Login from './components/Login';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
+import AddProperty from './components/AddProperty';
 
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
       {/* <Login></Login> */}
       <Routes>
         
-        <Route exact path='/' element={< Login />}></Route>
+        <Route exact path='/' element={< AddProperty />}></Route>
         <Route exact path='/home' element={< Home />}></Route>
         <Route exact path='/signup' element={< SignUp />}></Route>
       </Routes>

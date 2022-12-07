@@ -1,281 +1,119 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate} from 'react-router-dom';
+import React from "react";
+import { Form, Button } from "semantic-ui-react";
+import { useForm } from "react-hook-form";
+import "../main.css";
 
 function SignUp() {
-
-  const [error, setError] = useState(false);
-  // let history = useHistory();
-  const navigate = useNavigate();
-  const [inputValues, setInputValue] = useState({
-    fName: "",
-    lName: "",
-    email: "",
-    phone: "",
-    gender: "",
-    dob: "",
-    password: "",
-    confirmPassword: "",
-    isHost:false,
-  });
-
-  const [validation, setValidation] = useState({
-    fName: "",
-    lName: "",
-    email: "",
-    phone: "",
-    gender: "",
-    dob: "",
-    password: "", 
-    confirmPassword: "",
-  });
-
-  //handle submit updates
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setInputValue({ ...inputValues, [name]: value });
-  }
-
-  const checkValidation = () => {
-    let errors = validation;
-
-    //first Name validation
-    if (!inputValues.fName.trim()) {
-      errors.fName = "This field is required";
-    } else {
-      errors.fName = "";
-    }
-    
-    //last Name validation
-    if (!inputValues.lName.trim()) {
-      errors.lName = "This field is required";
-    } else {
-      errors.lName = "";
-    }
-
-    // email validation
-    const emailCond =
-      "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/";
-    if (!inputValues.email.trim()) {
-      errors.email = "This field is required";
-    } else if (!inputValues.email.match(emailCond)) {
-      errors.email = "Please input a valid email address";
-    } else {
-      errors.email = "";
-    }
-
-    // mobile number validation
-    if (!inputValues.phone) {
-      errors.phone = "This field is required";
-    } else {
-      errors.phone = "";
-    }
-
-
-    // gender validation
-    if (!inputValues.gender) {
-      errors.gender = "This field is required";
-    } else {
-      errors.gender = "";
-    }
-
-    // dob validation
-    if (!inputValues.dob) {
-      errors.dob = "This field is required";
-    } else {
-      errors.dob = "";
-    }
-
-
-    //password validation
-    const cond1 = "/^(?=.*[a-z]).{6,20}$/";
-    const cond2 = "/^(?=.*[A-Z]).{6,20}$/";
-    const cond3 = "/^(?=.*[0-9]).{6,20}$/";
-    const password = inputValues.password;
-    if (!password) {
-      errors.password = "This field is required";
-    } else if (password.length < 6) {
-      errors.password = "Password must be longer than 6 characters";
-    } else if (password.length >= 20) {
-      errors.password = "Password must shorter than 20 characters";
-    } else if (!password.match(cond1)) {
-      errors.password = "Password must contain at least one lowercase";
-    } else if (!password.match(cond2)) {
-      errors.password = "Password must contain at least one capital letter";
-    } else if (!password.match(cond3)) {
-      errors.password = "Password must contain at least a number";
-    } else {
-      errors.password = "";
-    }
-
-    //matchPassword validation
-    if (!inputValues.confirmPassword) {
-      errors.confirmPassword = "Please confirm your passwords";
-    } else if (inputValues.confirmPassword !== inputValues.Password) {
-      errors.confirmPassword = "Password does not match confirmation password";
-    } else {
-      errors.password = "";
-    }
-
-    setValidation(errors);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
   };
-
-  useEffect(() => {
-    checkValidation();
-  }, [inputValues]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const input = { firstName:inputValues.fName, lastName:inputValues.lName, gender:inputValues.gender, dob:inputValues.dob,
-      password:inputValues.password, emailId:inputValues.email, mobileNo:inputValues.phone, isHost: inputValues.isHost };
-      fetch("usersignup", {
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-          }, 
-          body : JSON.stringify(input),
-          method: 'POST'
-      })
-          .then(res => res.json())
-          .then((data) => {
-            if(data === "There was an issue adding the user. Please try again later!!"){
-                setError(true);
-            }else{
-                localStorage.setItem("user", data);
-                localStorage.setItem("isHost", data.isHost);
-                setError(false)
-                navigate("/home");
-            }
-          });
-  };
-
   return (
-    <div>
-      <div className="sign-up-form">
-        <form id="registrationForm" action="/" method="POST" onSubmit={handleSubmit}>
-        {(error) === true ? <h2 className="error">There was some error in signup. Please try again</h2> : null }
-          <div className="form-control">
-            <label>First Name</label>
+    <div className="container mt-5 signup-form">
+      <img src="images/logo.jpg" className="img-fluid" alt="Logo" />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-group mb-2 mt-4 signup-form-group">
+          <Form.Field>
+            {/* <label>First Name</label> */}
             <input
+              className="form-control"
               type="text"
-              name="fName"
-              id="fName"
+              name="firstName"
               placeholder="First Name"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.fName}
+              {...register("firstName", { required: true })}
             />
-            {validation.fName && <p>{validation.fName}</p>}
-          </div>
-          
-          <div className="form-control">
-            <label>Last Name</label>
+          </Form.Field>
+          {errors.firstName && <p>This field is required</p>}
+        </div>
+
+        <div className="form-group mb-2 signup-form-group">
+          <Form.Field>
+            {/* <label>Last Name</label> */}
             <input
+              className="form-control"
               type="text"
-              name="lName"
-              id="lName"
+              name="lastName"
               placeholder="Last Name"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.lName}
+              {...register("lastName", { required: true })}
             />
-            {validation.lName && <p>{validation.lName}</p>}
-          </div>
-          
-          <div className="form-control">
-            <label>Email ID</label>
+          </Form.Field>
+          {errors.lastName && <p>This field is required</p>}
+        </div>
+
+        <div className="form-group mb-2 signup-form-group">
+          <Form.Field>
+            {/* <label>Email</label> */}
             <input
-              type="text"
+              className="form-control"
+              type="email"
               name="email"
-              id="email"
-              placeholder="Email ID"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.email}
+              placeholder="Email"
+              {...register("email", {required: true, pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,})}
             />
-            {validation.email && <p>{validation.email}</p>}
-          </div>
+          </Form.Field>
+          {errors.email && <p>This field is required</p>}
+        </div>
 
-          <div className="form-control">
-            <label>Mobile Number</label>
+        <div className="form-group mb-2 signup-form-group">
+          <Form.Field>
+            {/* <label>Mobie Number</label> */}
             <input
-              type="tel"
+              className="form-control"
+              type="text"
               name="phone"
-              id="phone"
-              placeholder="XXX-XXX-XXXX"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.phone}
+              placeholder="Mobile Number"
+              {...register("phone", { required: true })}
             />
-            {validation.phone && <p>{validation.phone}</p>}
-          </div>
+          </Form.Field>
+          {errors.phone && <p>This field is required</p>}
+        </div>
 
-          <div className="form-control">
-            <label>Gender</label>
-            <label>Male</label>
+        <div className="form-group mb-2 signup-form-group">
+          <Form.Field>
+            {/* <label>Address</label> */}
             <input
-              type="radio"
-              name="gender"
-              id="male"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.gender}
+              className="form-control"
+              type="text"
+              name="address"
+              placeholder="Address"
+              {...register("address", { required: true })}
             />
-            <label>Female</label>
-            <input
-              type="radio"
-              name="gender"
-              id="female"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.gender}
-            />
-            {validation.gender && <p>{validation.gender}</p>}
-          </div>
+          </Form.Field>
+          {errors.address && <p>This field is required</p>}
+        </div>
 
-          <div className="form-control">
-            <label>Date of Birth</label>
+        <div className="form-group mb-2 signup-form-group">
+          <Form.Field>
+            {/* <label>Password</label> */}
             <input
-              type="date"
-              name="dob"
-              id="dob"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.dob}
-            />
-            {validation.dob && <p>{validation.dob}</p>}
-          </div>
-
-          <div className="form-control">
-            <label>Password</label>
-            <input
+              className="form-control"
               type="password"
               name="password"
               placeholder="Password"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.password}
-              required
+              {...register("password", {
+                required: true,
+                pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+              })}
             />
-            {validation.password && <p>{validation.password}</p>}
-          </div>
+          </Form.Field>
+          {errors.password && <p className="field-errors">This field is required</p>}
+        </div>
 
-          <div className="form-control">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              onChange={(e) => handleChange(e)}
-              value={inputValues.confirmPassword}
-              required
-            />
-          </div>
-
-          <input type="checkbox" name="becomehost" value={inputValues.isHost}  onChange={(e) => handleChange(e)}></input>
-          <label>Become a host</label>
-
-          <button type="submit" id="submit-button">
-            submit
-          </button>
-          
-          <span className="form-input-login">
-            Already have an account? Login <a href="/">here</a>
-          </span>
-
-        </form>
-      </div>
+        <div className="text-lg-start mt-4 pt-2">
+        <Button type="submit" className="btn loginButton">Sign Up</Button>
+        
+          <p className="small fw-bold mt-2 pt-1 mb-0">
+            Already have an account?{" "}
+            <a href="/" className="link-success">
+              Login
+            </a>
+          </p>
+        </div>
+      </Form>
     </div>
   );
 }
