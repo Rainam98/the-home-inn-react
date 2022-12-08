@@ -79,15 +79,15 @@ function BecomeHost() {
 
             <div className="hostcontainer">
               <p className="hostpara mb-4">
-                Are you sure you want to become a host?
+                Are you sure you want to <br className="hidden-ss"></br>become a host?
               </p>
               <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div className="btn-group mr-4" role="group" aria-label="First group">
-                  <button type="button" onClick={handleYes} className="btn btn-outline-success">Yes</button>
+                  <button type="button" onClick={handleYes} className="btn btn-outline-success hostacceptButton">Yes</button>
 
                 </div>
                 <div className="btn-group" role="group" aria-label="Third group">
-                  <button type="button" onClick={handleNo} className="btn btn-secondary">No</button>
+                  <button type="button" onClick={handleNo} className="btn btn-outline-danger hostdeclineButton">No</button>
                 </div>
               </div>
               {/* <button
