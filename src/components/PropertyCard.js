@@ -1,33 +1,202 @@
 import '../main.css';
 import React, { useState } from "react";
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property, isFavourite }) => {
 
     const [showDetails, setShowDetails] = useState(false);
-    const [favorite, setFavorite] = useState(false);
+    const propertyTitle = property.title
+    var propertyId = ''
     const navigate = useNavigate();
+    
 
     function handleMoreDetails() {
+        localStorage.setItem("property", JSON.stringify(property))
+        localStorage.setItem("ratePropertyTitle", property.title);
+        localStorage.setItem("ratePropertyImage", property.imgSrc);
 
-        setShowDetails(!showDetails);
+        
+        const queryString = `${property._id}`
+        fetch(`review/${queryString}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'GET',
+        })
+            .then(res => {
+                if (!res.ok) {
+
+                } else {
+                    return res.json()
+                }
+
+            })
+            .then((data) => {
+
+                
+                
+                localStorage.setItem("reviews", JSON.stringify(data));
+                navigate("/propertydetails")
+            });
+
+        // setShowDetails(!showDetails);
+        
+        
+       
 
     }
 
     function handleAddFavorites() {
 
-        setFavorite(true);
+        const propertyInput = {title: propertyTitle}
+            fetch("properties/title", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(propertyInput),
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        
+                    } else {
+                        return res.json()
+                    }
+                    
+                })
+                .then((data) => {
+    
+                    propertyId = data.propertyId;
+    
+                });
 
+
+        // setFavorite(true);
+        const email = localStorage.getItem("user");
+        const userInput = { emailId: email }
+        var userIdToPass = ''
+
+        fetch("user/emailId", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(userInput),
+        })
+            .then(res => {
+                if (!res.ok) {
+
+                } else {
+                    return res.json()
+                }
+
+            })
+            .then((data) => {
+
+                userIdToPass = data.userId;
+                
+                const inputdata = { userId: userIdToPass, propertyId: propertyId }
+                const getProperties = () => {
+                    fetch('favourites/add', {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        method: 'POST',
+                        body: JSON.stringify(inputdata)
+                    })
+                        .then(res => res.json())
+                        .then((data) => {
+                            isFavourite = true
+                            navigate('/favorites')
+                        });
+                }
+
+                getProperties()
+
+            });
 
     }
     function handleRemoveFavorites() {
 
-        setFavorite(false);
+        // setFavorite(false);
+        const propertyInput = {title: propertyTitle}
+            fetch("properties/title", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(propertyInput),
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        
+                    } else {
+                        return res.json()
+                    }
+                    
+                })
+                .then((data) => {
+    
+                    propertyId = data.propertyId;
+    
+                });
+
+
+        // setFavorite(true);
+        const email = localStorage.getItem("user");
+        const userInput = { emailId: email }
+        var userIdToPass = ''
+
+        fetch("user/emailId", {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(userInput),
+        })
+            .then(res => {
+                if (!res.ok) {
+
+                } else {
+                    return res.json()
+                }
+
+            })
+            .then((data) => {
+
+                userIdToPass = data.userId;
+                
+                const inputdata = { userId: userIdToPass, propertyId: propertyId }
+                const getProperties = () => {
+                    fetch('favourites/remove', {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        method: 'POST',
+                        body: JSON.stringify(inputdata)
+                    })
+                        .then(res => res.json())
+                        .then((data) => {
+                            isFavourite = false
+                            window.location.reload(false)
+                        });
+                }
+
+                getProperties()
+
+            });
     }
 
     function handleRating() {
-       
+
         localStorage.setItem("ratePropertyTitle", property.title);
         localStorage.setItem("ratePropertyImage", property.imgSrc);
         navigate("/rateproperty")
@@ -61,7 +230,7 @@ const PropertyCard = ({ property }) => {
                     </div>
                     <br></br>
                     <div className='d-flex'>
-                        {(favorite) ? <button onClick={() => handleRemoveFavorites()} className="btn mx-auto">Remove from Favorites</button> :
+                        {(isFavourite) ? <button onClick={() => handleRemoveFavorites()} className="btn mx-auto">Remove from Favorites</button> :
                             <button onClick={() => handleAddFavorites()} className="btn mx-auto">Add To Favorites</button>}
                     </div>
                     <br></br>
@@ -69,16 +238,6 @@ const PropertyCard = ({ property }) => {
                         <button onClick={() => handleRating()} className="btn mx-auto">Rate Property</button>
                     </div>
 
-
-
-                    {/* <div className='d-flex'>
-                    <button onClick={() => handleMoreDetails()} className="btn mx-auto">More Details</button>
-                    </div>
-                    <br></br>
-                    <div className='d-flex'>
-                    {(favorite) ? <button onClick={() => handleRemoveFavorites({property})} className="btn mx-auto">Remove from Favorites</button> :
-                    <button onClick={() => handleAddFavorites({property})} className="btn mx-auto">Add To Favorites</button>}
-                    </div> */}
                 </div>
             </div>
         </div>

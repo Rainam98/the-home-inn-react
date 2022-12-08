@@ -63,7 +63,7 @@ function MainBody() {
             <SearchBar filterText={filterText}></SearchBar>
             <br></br>
             
-            {properties && <Properties properties={properties}></Properties>}
+            {properties && <Properties properties={properties} isFavorite={false}></Properties>}
             
         </div>
 

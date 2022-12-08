@@ -3,8 +3,7 @@ function Header() {
     let url = " ";
 
     function handleSignout(){
-        localStorage.removeItem("user");
-        localStorage.removeItem("isHost");
+        localStorage.clear();
     }
 
     return (

@@ -23,12 +23,12 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const property = await Property.findById(req.params.id)
-    console.log("Property fetched with id : " + req.params.id)
-    res.json(property)
+    const property = await Property.findOne({title:req.params.id})
+    console.log("Property fetched with title : " + req.params.id)
+    res.status(200).json(property)
 
   } catch (err) {
-    res.json({ message: "No Property found with id : " + req.params.id })
+    res.status(404).json({ message: "No Property found with title : " + req.params.id })
   }
 })
 
