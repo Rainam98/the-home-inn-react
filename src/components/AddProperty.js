@@ -81,6 +81,90 @@ function AddProperty() {
           <Form.Field>
             <div className="row">
               <div className="col-md-7">
+                <label>Property Type</label>
+              </div>
+              <div className="col-md-5">
+                <input
+                  className="form-control form-field"
+                  type="text"
+                  name="ptype"
+                  id="ptype"
+                  placeholder="Enter property type"
+                  {...register("ptype", { required: true })}
+                />
+              </div>
+            </div>
+          </Form.Field>
+          {errors.ptype && <p>This field is required</p>}
+        </div>
+
+        <div className="form-group mb-2 mt-4 signup-form-group">
+          <Form.Field>
+            <div className="row">
+              <div className="col-md-7">
+                <label>City</label>
+              </div>
+              <div className="col-md-5">
+                <input
+                  className="form-control form-field"
+                  type="text"
+                  name="city"
+                  id="city"
+                  placeholder="Enter city name"
+                  {...register("city", { required: true })}
+                />
+              </div>
+            </div>
+          </Form.Field>
+          {errors.city && <p>This field is required</p>}
+        </div>
+
+        <div className="form-group mb-2 mt-4 signup-form-group">
+          <Form.Field>
+            <div className="row">
+              <div className="col-md-7">
+                <label>State</label>
+              </div>
+              <div className="col-md-5">
+                <input
+                  className="form-control form-field"
+                  type="text"
+                  name="state"
+                  id="state"
+                  placeholder="Enter state name"
+                  {...register("state", { required: true })}
+                />
+              </div>
+            </div>
+          </Form.Field>
+          {errors.state && <p>This field is required</p>}
+        </div>
+
+        <div className="form-group mb-2 mt-4 signup-form-group">
+          <Form.Field>
+            <div className="row">
+              <div className="col-md-7">
+                <label>Country</label>
+              </div>
+              <div className="col-md-5">
+                <input
+                  className="form-control form-field"
+                  type="text"
+                  name="country"
+                  id="country"
+                  placeholder="Enter country name"
+                  {...register("country", { required: true })}
+                />
+              </div>
+            </div>
+          </Form.Field>
+          {errors.country && <p>This field is required</p>}
+        </div>
+
+        <div className="form-group mb-2 mt-4 signup-form-group">
+          <Form.Field>
+            <div className="row">
+              <div className="col-md-7">
                 <label>Per Night Fees</label>
               </div>
               <div className="col-md-5">
