@@ -50,7 +50,7 @@ app.use('/review', reviewrouter)
 
 
 const favouriterouter = require('./routes/favourite')
-app.use('/favourite', favouriterouter)
+app.use('/favourites', favouriterouter)
 
 
 

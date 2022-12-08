@@ -3,7 +3,7 @@ import React from "react";
 import PropertyCard from './PropertyCard'
 
 
-const Properties = ({ properties }) => {
+const Properties = ({ properties, isFavorite }) => {
 
 
     return (
@@ -12,7 +12,7 @@ const Properties = ({ properties }) => {
             {
                 properties.map((property) => {
 
-                    return <PropertyCard property={property}></PropertyCard>
+                    return <PropertyCard property={property} isFavourite={isFavorite}></PropertyCard>
 
                 }
                 )}

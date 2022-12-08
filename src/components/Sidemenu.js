@@ -31,7 +31,7 @@ function Sidemenu() {
                     <a className="bi bi-building card-icon" href={url}>&nbsp;Reservations</a>
                 </li>
                 <li>
-                    <a className="bi bi-star card-icon" href={url}>&nbsp;Favorites</a>
+                    <a className="bi bi-star card-icon" href='/favorites'>&nbsp;Favorites</a>
                 </li>
                 {/* <li>
                     <a className="bi bi-chat card-icon" href={url}>&nbsp;Reviews</a>
