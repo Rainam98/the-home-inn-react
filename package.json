@@ -9,6 +9,7 @@
     "express-generator": "^4.16.1",
     "mdb-react-ui-kit": "^5.0.0",
     "memory": "^0.0.3",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.40.0",

@@ -1,8 +1,22 @@
 const express = require('express')
 const router = express.Router()
 const Property = require('../models/property')
+const multer = require("multer")
 
 
+
+var path = require('path')
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+})
+
+var upload = multer({ storage: storage });
 // API for getting all the properties
 // Eg request : GET http://localhost:9000/properties
 
@@ -66,25 +80,32 @@ router.delete('/:id', async (req, res) => {
   }
 */
 
-router.post('/', async (req, res) => {
+
+router.post('/', upload.single('imgSrc'),async (req, res) => {
+
+ const obj = JSON.parse(req.body.data);
+
+
+ 
   const property = new Property({
     // _id: req.body._id,
-    imgSrc: req.body.imgSrc,
-    title: req.body.title,
-    description: req.body.description,
-    nightlyFee: req.body.nightlyFee,
-    serviceFee: req.body.serviceFee,
-    cleaningFee: req.body.cleaningFee,
-    amenities: req.body.amenities,
-    bedRooms: req.body.bedRooms,
-    guests: req.body.guests,
-    availabilityFrom: req.body.availabilityFrom,
-    availabilityTo: req.body.availabilityTo,
-    hostId: req.body.hostId,
-    address: req.body.address
+    imgSrc:  obj.imgSrc,
+    title: obj.title,
+    description: obj.description,
+    nightlyFee: obj.nightlyFee,
+    serviceFee: obj.serviceFee,
+    cleaningFee: obj.cleaningFee,
+    amenities: obj.amenities,
+    bedRooms: obj.bedRooms,
+    guests: obj.guests,
+    availabilityFrom: obj.availabilityFrom,
+    availabilityTo: obj.availabilityTo,
+    propertyType: obj.propertyType,
+    address: obj.address
   })
 
   try {
+    console.log(property)
     const addedProperty = await property.save()
     console.log("New Property Added!!");
     res.json(addedProperty)
