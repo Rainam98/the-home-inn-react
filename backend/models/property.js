@@ -38,7 +38,7 @@ const propertiesSchema = new mongoose.Schema({
     },
     bedRooms: {
         type: Number,
-        required: true
+        // required: true
     },
     guests: {
         type: Number,
@@ -69,6 +69,14 @@ const propertiesSchema = new mongoose.Schema({
             type: String,
             required: true
         }
+    },
+    hostId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    status: {
+        type: Boolean,
+        required: true
     }
 
 })

@@ -26,7 +26,7 @@ function Sidemenu() {
 
                 {(isHost)
                     ? <li>
-                        <a className="bi bi-gear card-icon" href={url}>&nbsp;My Properties</a>
+                        <a className="bi bi-gear card-icon" href="/myproperties">&nbsp;My Properties</a>
                     </li>
                     : null
                 }

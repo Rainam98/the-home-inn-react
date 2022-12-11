@@ -23,7 +23,7 @@ function MainBody() {
                     setProperties(data);
                 });
             
-                const queryParam = `userId=${user._id}`
+            const queryParam = `userId=${user._id}`
             fetch(`reservations?${queryParam}`, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,6 +34,18 @@ function MainBody() {
                 .then((data) => {
                     localStorage.setItem('reservations', JSON.stringify(data));
                 });
+
+                const queryParam1 = `hostId=${user._id}`
+                fetch(`host?${queryParam1}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(res => res.json())
+                    .then((data) => {
+                        localStorage.setItem('myProperties', JSON.stringify(data));
+                    });
         }
 
         getProperties()

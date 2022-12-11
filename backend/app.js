@@ -6,6 +6,7 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 
 
+
 bodyParser = require("body-parser");
 const url ='mongodb://localhost/HomeInn'
 mongoose.connect(url, {useNewUrlParser:true})
@@ -51,6 +52,9 @@ app.use('/review', reviewrouter)
 
 const favouriterouter = require('./routes/favourite')
 app.use('/favourites', favouriterouter)
+
+const hostrouter = require('./routes/host')
+app.use('/host', hostrouter)
 
 
 
