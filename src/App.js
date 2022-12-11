@@ -14,6 +14,7 @@ import ReservationDetails from './components/ReservationDetails';
 import Favorites from './components/Favorites';
 import PropertyDetails from './components/PropertyDetails';
 import AddReservation from './components/AddReservation';
+import ViewProperty from './components/ViewProperty';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route exact path='/propertydetails' element={< PropertyDetails />}></Route>
         <Route exact path='/addreservation' element={< AddReservation />}></Route>
         <Route exact path='/reservationdetails' element={< ReservationDetails />}></Route>
+        <Route exact path='/myproperties' element={< ViewProperty />}></Route>
       </Routes>
     </Router>
   );

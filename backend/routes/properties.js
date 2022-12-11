@@ -9,7 +9,7 @@ var path = require('path')
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '/HomeInn/public/images/')
+    cb(null, '/UTD/WPL/Final Project/the-home-inn-react/public/images')
   },
   filename: function (req, file, cb) {
   
@@ -34,19 +34,19 @@ router.get('/', async (req, res) => {
 })
 
 
-// API for getting property with specific ID
-// Eg request : GET http://localhost:9000/properties/63667a9add45f7b7e8762148
+// // API for getting property with specific ID
+// // Eg request : GET http://localhost:9000/properties/63667a9add45f7b7e8762148
 
-router.get('/:id', async (req, res) => {
-  try {
-    const property = await Property.findOne({title:req.params.id})
-    console.log("Property fetched with title : " + req.params.id)
-    res.status(200).json(property)
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const property = await Property.findOne({title:req.params.id})
+//     console.log("Property fetched with title : " + req.params.id)
+//     res.status(200).json(property)
 
-  } catch (err) {
-    res.status(404).json({ message: "No Property found with title : " + req.params.id })
-  }
-})
+//   } catch (err) {
+//     res.status(404).json({ message: "No Property found with title : " + req.params.id })
+//   }
+// })
 
 
 // API for deleting a specific property
@@ -86,9 +86,8 @@ router.delete('/:id', async (req, res) => {
 router.post('/', upload.single('imgSrc'),async (req, res) => {
 
  const obj = JSON.parse(req.body.data);
-
- console.log(req.file.originalname)
-
+ 
+  console.log(obj)
  
   const property = new Property({
     // _id: req.body._id,
@@ -104,8 +103,13 @@ router.post('/', upload.single('imgSrc'),async (req, res) => {
     availabilityFrom: obj.availabilityFrom,
     availabilityTo: obj.availabilityTo,
     propertyType: obj.propertyType,
-    address: obj.address
+    address: {
+      city: obj.city,
+      state: obj.state,
+      country: obj.country
+    }
   })
+
 
   try {
    
@@ -113,10 +117,10 @@ router.post('/', upload.single('imgSrc'),async (req, res) => {
     console.log("New Property Added!!");
     
     
-    fs.rename( '/HomeInn/public/images/'+req.file.originalname, '/HomeInn/public/images/'+addedProperty._id+'.jpg', function(err) {
+    fs.rename( '/UTD/WPL/Final Project/the-home-inn-react/public/images'+req.file.originalname, '/UTD/WPL/Final Project/the-home-inn-react/public/images'+addedProperty._id+'.jpg', function(err) {
       if ( err ) console.log('ERROR: ' + err);
   });
-  property.imgSrc = '/HomeInn/public/images/'+addedProperty._id+'.jpg';
+  property.imgSrc = '/UTD/WPL/Final Project/the-home-inn-react/public/images'+addedProperty._id+'.jpg';
   const finalddedProperty = await property.save()
     res.json(finalddedProperty)
   } catch (err) {
@@ -209,6 +213,24 @@ router.patch("/:id", async (req, res) => {
     res.json({ message: "Property update failed for id : " + req.params.id })
   }
 })
+
+
+// API for getting all the properties of a host
+// Eg request : GET http://localhost:9000/properties/myproperties?hostId=638f7bc5e8b8aa5b7dcf79c0
+
+// router.get('/myproperties', async (req, res) => {
+//   try {
+//     console.log(req.query.hostId)
+//     const properties = await Property.find({hostId:req.query.hostId})
+//     // console.log(properties)
+//     console.log(properties.length)
+//     res.status(200).json(properties)
+//     console.log("All properties fetched for host")
+
+//   } catch (err) {
+//     res.status(404).json({ message: 'Error' + err })
+//   }
+// })
 
 // API for get property ID from title
 // Eg request : POST http://localhost:9000/properties/title
