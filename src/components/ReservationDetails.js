@@ -1,46 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidemenu from "./Sidemenu";
 import Header from "./Header";
 import Footer from "./Footer";
+import Moment from "react-moment";
+import { useNavigate } from "react-router-dom";
 
 function ReservationDetails() {
-  const propertyUpdate = () => {
-    alert("Property Updated");
-  };
 
-  const propertyDelete = () => {
-    alert("Property Deleted");
-  };
+  
+  const [error, setError] = useState(false);
+  const [isNull, setIsNull] = useState(false);
+  var isError = false
 
-  const data = [
-    {
-      ptitle: "UTD",
-      description: "Worst University",
-      guests: 5,
-      city: "Dallas",
-      state: "TX",
-      availfrom: "12/16/2022",
-      availto: "12/20/2022",
-    },
-    {
-      ptitle: "UTD",
-      description: "Worst University",
-      guests: 5,
-      city: "Dallas",
-      state: "TX",
-      availfrom: "12/16/2022",
-      availto: "12/20/2022",
-    },
-    {
-      ptitle: "UTD",
-      description: "Worst University",
-      guests: 5,
-      city: "Dallas",
-      state: "TX",
-      availfrom: "12/16/2022",
-      availto: "12/20/2022",
-    },
-  ];
+  const reservationString = localStorage.getItem('reservations');
+  
+  const reservations = JSON.parse(reservationString);
+  const navigate = useNavigate()
+  
+
+  const propertyDelete = (reservationId) => {
+   
+    const queryString = `${reservationId}`
+    fetch(`reservations/${queryString}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: 'POST'
+    })
+      .then(res => {
+        if (!res.ok) {
+          setError(true);
+          isError = true
+        } else {
+          setError(false);
+          isError = false;
+          return res.json()
+        }
+      }).then((data) => {
+        console.log(isError)
+        if(!isError){
+
+          localStorage.setItem('reservations', JSON.stringify(data));
+          navigate('/home')
+        }
+      })
+      
+  };
 
   return (
     <div>
@@ -51,51 +57,62 @@ function ReservationDetails() {
             <Header></Header>
 
             <div className="App">
-              <table className="table table-hover" id="checkDataTable">
-                <thead>
-                  <tr>
-                    <th>Property Title</th>
-                    <th>Description</th>
-                    <th>No. of Guests</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Available From</th>
-                    <th>Available To</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map((val, key) => {
-                    return (
-                      <tr key={key}>
-                        <td>{val.ptitle}</td>
-                        <td>{val.description}</td>
-                        <td>{val.guests}</td>
-                        <td>{val.city}</td>
-                        <td>{val.state}</td>
-                        <td>{val.availfrom}</td>
-                        <td>{val.availto}</td>
-                        <td>
-                          <button
-                            type="button"
-                            onClick={propertyUpdate}
-                            className="deleteRow btn btn-outline-warning propertydetailsupdateButton"
-                          >
-                            Update
-                          </button>
-                          <button
-                            type="button"
-                            onClick={propertyDelete}
-                            className="deleteRow btn btn-outline-delete propertydetailsdeleteButton"
-                          >
-                            Delete
-                          </button>
-                        </td>
+            <h1 className="popular-property">Your Reservations</h1>
+            
+
+              {(error) === true ? <h4 className="error">Cannot delete reservation before 48 hours of checkin or after checkout date</h4> : null }
+              <br></br>
+              {
+                (isNull)
+                  ? <p>There are no Reservations yet</p>
+                  : <table className="table table-hover" id="checkDataTable">
+                    <thead>
+                      <tr>
+                        <th>Property Title</th>
+                        <th>No. of Guests</th>
+                        <th>Location</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Action</th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                    </thead>
+                    <tbody>
+
+                      {reservations.map((val, key) => {
+                        return (
+                          <tr key={key}>
+                            <td>{val.propertyTitle}</td>
+                            <td>{val.guests}</td>
+                            <td>{val.city}, {val.state}</td>
+                            <td><Moment format="MM/DD/YYYY">{val.checkIn}</Moment></td>
+                            <td><Moment format="MM/DD/YYYY">{val.checkOut}</Moment></td>
+                            {(val.isActive)
+                              ? <td>
+                                <button
+                                  type="button"
+                                  onClick={()=>propertyDelete(val.reservationId)}
+                                  className="deleteRow btn btn-outline-delete propertydetailsdeleteButton"
+                                >
+                                  Delete
+                                </button>
+                              </td>
+                              : <td><button
+                                type="button"
+                                disabled
+                                className="deleteRow btn btn-outline-delete propertydetailsdeleteButton"
+                              >
+                                Cancelled
+                              </button></td>}
+
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+
+              }
+
+
             </div>
           </div>
         </div>

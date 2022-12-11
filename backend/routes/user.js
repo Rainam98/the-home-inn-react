@@ -57,20 +57,20 @@ router.post('/signup', async (req, res) => {
 
 
 
-router.post('/emailId', async (req, res) => {
+// router.post('/emailId', async (req, res) => {
 
-    User.findOne({ emailId: req.body.emailId }).then(user => {
+//     User.findOne({ emailId: req.body.emailId }).then(user => {
         
-            res.status(200).json({ userId: user._id })
-            console.log("Got the user Id")
+//             res.status(200).json({ userId: user._id })
+//             console.log("Got the user Id")
        
-    })
-        .catch((error) => {
-            console.log(error)
-            res.status(404).json({ message: 'No user find with given emailId' })
-        })
+//     })
+//         .catch((error) => {
+//             console.log(error)
+//             res.status(404).json({ message: 'No user find with given emailId' })
+//         })
 
-})
+// })
 
 
 module.exports = router

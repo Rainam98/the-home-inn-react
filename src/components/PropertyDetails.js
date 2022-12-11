@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import DetailsSection from "./DetailsSection";
 import Footer from './Footer';
 import Header from './Header';
@@ -15,14 +16,19 @@ function PropertyDetails() {
 
     const StringReviews = localStorage.getItem("reviews")
     const reviews = JSON.parse(StringReviews);
-    console.log(reviews)
+    const navigate = useNavigate();
     useEffect(() => {
         if (reviews.length === 0) {
             setShowRatings(false)
         } else {
             setShowRatings(true)
         }
-    }, [])
+    }, []);
+
+
+    function handleSubmit(){
+        navigate("/addreservation")
+    }
 
 
 
@@ -45,7 +51,7 @@ function PropertyDetails() {
 
                         <br></br>
                         <div className="d-flex justify-content-center">
-                            <button className="btn btn-lg"> Reserve this Property</button>
+                            <button onClick={handleSubmit} className="btn btn-lg"> Reserve this Property</button>
                         </div>
                     </div>
                 </div>

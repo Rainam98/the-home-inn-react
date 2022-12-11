@@ -13,6 +13,7 @@ import RateProperty from './components/RateProperty';
 import ReservationDetails from './components/ReservationDetails';
 import Favorites from './components/Favorites';
 import PropertyDetails from './components/PropertyDetails';
+import AddReservation from './components/AddReservation';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
         <Route exact path='/host' element={< BecomeHost />}></Route>
         <Route exact path='/favorites' element={< Favorites />}></Route>
         <Route exact path='/propertydetails' element={< PropertyDetails />}></Route>
+        <Route exact path='/addreservation' element={< AddReservation />}></Route>
+        <Route exact path='/reservationdetails' element={< ReservationDetails />}></Route>
       </Routes>
     </Router>
   );

@@ -31,6 +31,10 @@ const reservationSchema = new mongoose.Schema({
     numberOfGuests: {
         type: Number,
         required: true
+    },
+    isActive: {
+        type: Boolean,
+        required: true
     }
 
 })

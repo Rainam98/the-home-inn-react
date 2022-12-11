@@ -2,7 +2,11 @@ import '../main.css';
 
 function Sidemenu() {
     let url = "";
-    const isHost = localStorage.getItem("isHost");
+    const userString = localStorage.getItem('user');
+    const user = JSON.parse(userString);
+    // console.log(user)
+    const isHost = user.isHost;
+    console.log(isHost);
     return (
         <nav id="sidebar">
             <div className="sidebar-header">
@@ -12,7 +16,7 @@ function Sidemenu() {
             </div>
 
             <ul className="list-unstyled components">
-                {(isHost) === 'true'
+                {(isHost)
                     ? <li>
                         <a className="bi bi-file-plus-fill card-icon" href='/addproperty'>&nbsp;Add a Property</a>
                     </li>
@@ -20,7 +24,7 @@ function Sidemenu() {
                         <a className="bi bi-file-plus-fill card-icon" href="/host">&nbsp;Become a host</a>
                     </li>}
 
-                {(isHost) === 'true'
+                {(isHost)
                     ? <li>
                         <a className="bi bi-gear card-icon" href={url}>&nbsp;My Properties</a>
                     </li>
@@ -28,7 +32,7 @@ function Sidemenu() {
                 }
 
                 <li>
-                    <a className="bi bi-building card-icon" href={url}>&nbsp;Reservations</a>
+                    <a className="bi bi-building card-icon" href='/reservationdetails'>&nbsp;Reservations</a>
                 </li>
                 <li>
                     <a className="bi bi-star card-icon" href='/favorites'>&nbsp;Favorites</a>

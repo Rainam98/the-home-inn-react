@@ -5,70 +5,24 @@ import Sidemenu from './Sidemenu';
 
 function RateProperty() {
 
-    const propertyTitle = localStorage.getItem("ratePropertyTitle");
-    const propertyImage = localStorage.getItem("ratePropertyImage");
+    const propertyString = localStorage.getItem('property');
+    const property = JSON.parse(propertyString);
 
-    const email = localStorage.getItem('user');
+
+    // setFavorite(true);
+    const userString = localStorage.getItem('user');
+    const user = JSON.parse(userString);
 
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState(0);
-    const [userId, setUserId] = useState('');
-    const [propertyId, setPropertyId] = useState('');
+    
     const [success, setSuccess] = useState(false);
     
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
-        const userInput = {emailId: email}
-        fetch("user/emailId", {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            method: 'POST',
-            body: JSON.stringify(userInput),
-        })
-            .then(res => {
-                if (!res.ok) {
-                    setSuccess(false);
-                } else {
-                    return res.json()
-                }
-                
-            })
-            .then((data) => {
-
-                setUserId(data.userId);
-
-            });
-
-
-            const propertyInput = {title: propertyTitle}
-            fetch("properties/title", {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(propertyInput),
-            })
-                .then(res => {
-                    if (!res.ok) {
-                        setSuccess(false);
-                    } else {
-                        return res.json()
-                    }
-                    
-                })
-                .then((data) => {
-    
-                    setPropertyId(data.propertyId);
-    
-                });
-
-        const input = { userId: userId, propertyId: propertyId, comment: comment, rating: rating};
+        const input = { userId: user._id, propertyId: property._id, comment: comment, rating: rating};
         fetch("review", {
             headers: {
                 'Content-Type': 'application/json',
@@ -88,11 +42,9 @@ function RateProperty() {
             })
             .then((data) => {
 
-                setSuccess(true);
-                
+                setSuccess(true);               
                 setComment('');
                 setRating(0);
-
 
             });
     }
@@ -105,18 +57,18 @@ function RateProperty() {
                     <div id="content">
                         <Header></Header>
                         <div className="property-image">
-                            <img src={propertyImage} alt="Unable to Load"></img>
+                            <img src={property.imgSrc} alt="Unable to Load"></img>
                         </div>
-                        <h1 className="popular-property">Add Review for {propertyTitle}</h1>
+                        <h1 className="popular-property">Add Review for {property.title}</h1>
                         {(success) === true ? <h4 className="success">Your Review was added successfully!!</h4> : null }
                         <div className="review-form-container">
                         <form className="review-form" onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <input type="email" value={email}  className="form-control" disabled id="exampleInputEmail1" placeholder="Your Email"/>
+                                <input type="email" value={user.emailId}  className="form-control" disabled id="exampleInputEmail1" placeholder="Your Email"/>
                             </div>
                             <div className="form-group">
                                 
-                                <input type="text" value={propertyTitle} className="form-control" disabled id="exampleInputProperty1" placeholder="Property you are rating"/>
+                                <input type="text" value={property.title} className="form-control" disabled id="exampleInputProperty1" placeholder="Property you are rating"/>
                             </div>
                             <div className="form-group">
                                 <textarea value={comment} onChange={(e) => setComment(e.target.value)} className="form-control" id="exampleInputComment1" placeholder="Add Comments here"/>
