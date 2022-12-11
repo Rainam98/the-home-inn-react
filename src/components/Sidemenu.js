@@ -14,7 +14,7 @@ function Sidemenu() {
             <ul className="list-unstyled components">
                 {(isHost) === 'true'
                     ? <li>
-                        <a className="bi bi-file-plus-fill card-icon" href={url}>&nbsp;Add a Property</a>
+                        <a className="bi bi-file-plus-fill card-icon" href='/addproperty'>&nbsp;Add a Property</a>
                     </li>
                     : <li>
                         <a className="bi bi-file-plus-fill card-icon" href="/host">&nbsp;Become a host</a>
