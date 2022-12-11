@@ -3,6 +3,7 @@ import { Form, Button } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
 import "../main.css";
 import { useState } from "react";
+import axios from 'axios';
 
 function AddProperty() {
   const [title,setTitle] = useState("");
@@ -15,6 +16,7 @@ function AddProperty() {
   const [guests, setGuests] = useState("");
   const [availabilityFrom, setAvailibilityfrom] = useState("");
   const [availabilityTo, setAvailibilityto] = useState("");
+  const [propertyType, setPropertyType] = useState("");
  
   const settitle = (e)=>{
    const {value} = e.target;
@@ -66,16 +68,49 @@ function AddProperty() {
     setAvailibilityto(value);
    }
 
+   const setpropertytype = (e)=>{
+    const {value} = e.target;
+    setPropertyType(value);
+   }
+
+
+
    // TODO : this method has to be completed to send request to backend. 
   //  Formdata has to be updated with all the fields
   // just file has been appended. like wise json payload
    
-// const addPropertydata = async(e)=>{
-//   e.preventDefault();
-//   var formdata = new FormData();
-//   formdata.append(("imgSrc", img);
+const addPropertydata = async(e)=>{
+  e.preventDefault();
   
-// }
+  var formdata = new FormData();
+  formdata.append('imgSrc', img);
+  const data = JSON.stringify({
+    imgSrc: 'property2.png',
+    title: title,
+    description: description,
+    nightlyFee: nightlyFee,
+    serviceFee: serviceFee,
+    cleaningFee: 5,
+    amenities: amenities,
+    bedrooms: bedrooms,
+    guests: guests,
+    availabilityFrom: availabilityFrom,
+    availabilityTo: availabilityTo,
+    propertyType: propertyType
+    
+  })
+  
+  // append directly as part of the postData in plain text
+  formdata.append('data', data);
+  
+  const config  ={
+    headers:{
+      "Content-Type": "multipart/form-data"
+    }
+  }
+  const res = axios.post("/properties", formdata, config)
+  console.log(res)
+}
  
 
   const {
@@ -306,6 +341,28 @@ function AddProperty() {
             </div>
           </Form.Field>
           {errors.availabilityTo && <p>This field is required</p>}
+        </div>
+
+        <div className="form-group mb-2 mt-4 signup-form-group">
+          <Form.Field>
+            <div className="row">
+              <div className="col-md-7">
+                <label>Property Type</label>
+              </div>
+              <div className="col-md-5">
+                <input
+                className="form-control form-field"
+                  type="text"
+                  onChange={setavailibilityto}
+                  name="propertyType"
+                  id="propertyType"
+                  placeholder="Property type"
+                  {...register("propertyType", { required: true })}
+                />
+              </div>
+            </div>
+          </Form.Field>
+          {errors.propertyType && <p>This field is required</p>}
         </div>
 
         <div className="text-lg-start mt-4 pt-2">

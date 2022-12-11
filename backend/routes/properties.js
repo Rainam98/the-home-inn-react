@@ -9,7 +9,7 @@ var path = require('path')
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    cb(null, '/HomeInn/public/images/')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
@@ -82,7 +82,7 @@ router.delete('/:id', async (req, res) => {
 
 
 router.post('/', upload.single('imgSrc'),async (req, res) => {
-
+console.log(req);
  const obj = JSON.parse(req.body.data);
 
 
