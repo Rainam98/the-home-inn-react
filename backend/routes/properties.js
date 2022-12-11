@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Property = require('../models/property')
 const multer = require("multer")
-
+var fs =require('fs')
 
 
 var path = require('path')
@@ -12,7 +12,9 @@ var storage = multer.diskStorage({
     cb(null, '/HomeInn/public/images/')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  
+   
+    cb(null,  path.basename(file.originalname)) //Appending extension
   }
 })
 
@@ -82,14 +84,15 @@ router.delete('/:id', async (req, res) => {
 
 
 router.post('/', upload.single('imgSrc'),async (req, res) => {
-console.log(req);
+
  const obj = JSON.parse(req.body.data);
 
+ console.log(req.file.originalname)
 
  
   const property = new Property({
     // _id: req.body._id,
-    imgSrc:  obj.imgSrc,
+    // imgSrc:  obj.imgSrc,
     title: obj.title,
     description: obj.description,
     nightlyFee: obj.nightlyFee,
@@ -105,10 +108,17 @@ console.log(req);
   })
 
   try {
-    console.log(property)
+   
     const addedProperty = await property.save()
     console.log("New Property Added!!");
-    res.json(addedProperty)
+    
+    
+    fs.rename( '/HomeInn/public/images/'+req.file.originalname, '/HomeInn/public/images/'+addedProperty._id+'.jpg', function(err) {
+      if ( err ) console.log('ERROR: ' + err);
+  });
+  property.imgSrc = '/HomeInn/public/images/'+addedProperty._id+'.jpg';
+  const finalddedProperty = await property.save()
+    res.json(finalddedProperty)
   } catch (err) {
     res.json({ message: "There was an issue adding the property. Please try again later!!" })
   }
