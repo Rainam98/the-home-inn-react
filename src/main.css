@@ -540,6 +540,13 @@ footer {
   font-family: "Times New Roman", Times, serif;
 }
 
+.reserve-errors {
+    font-size: 13px;
+    color: red;
+    font-family: "Times New Roman", Times, serif;
+    text-align: right;
+  }
+
 /* ---------------------------------------------------
    BECOME HOST PAGE
 ----------------------------------------------------- */

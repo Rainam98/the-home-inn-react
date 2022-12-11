@@ -5,6 +5,7 @@ function Login() {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [error, setError] = useState(false);
+    var iserror = false;
     // let history = useHistory();
     const navigate = useNavigate();
 
@@ -20,24 +21,29 @@ function Login() {
             method: 'POST'
         })
             .then(res => {
-                
-                if (!res.ok) {
-                    setError(true);
+                console.log(res);
+                if (res.ok) {
+                    
+                    setError(false)
+                    iserror = false;
+                    return res.json()
+                    
+                } else {
+                    iserror = true;
+                   setError(true);
                     setEmail('');
                     setPass('');
-                } else {
-                    return res.json()
                 }
             })
             .then((data) => {
 
-                localStorage.setItem("user", data.emailId);
-                localStorage.setItem("isHost", data.isHost);
-                setError(false)
-                navigate("/home");
+                localStorage.setItem("user", JSON.stringify(data));
+                
+                if(iserror){
+                }else{
+                    navigate("/home");
+                }
 
-                let user = localStorage.getItem("user");
-                console.log(user)
 
             });
     }

@@ -7,62 +7,31 @@ import Footer from "./Footer";
 function BecomeHost() {
 
   const navigate = useNavigate();
-  const [userId, setUserId] = useState('')
-  const email = localStorage.getItem('user');
-  console.log(email)
+  const userString = localStorage.getItem('user');
+  const user = JSON.parse(userString);
+
   function handleYes() {
 
 
-    const userInput = { emailId: email }
 
-    fetch("user/emailId", {
+    const input = { userId: user._id }
+    fetch("hostsignup", {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      method: 'POST',
-      body: JSON.stringify(userInput),
+      body: JSON.stringify(input),
+      method: 'POST'
     })
       .then(res => {
+
         if (!res.ok) {
-          console.log("Error in User Lookup")
+          console.log("Error in Host Signup")
         } else {
-          return res.json()
+          localStorage.setItem("user", JSON.stringify(res.json()));
+        navigate("/home")
         }
-
       })
-      .then((data) => {
-        console.log(data.userId)
-        setUserId(data.userId);
-        console.log(userId)
-        const input = { userId: data.userId }
-        fetch("hostsignup", {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(input),
-          method: 'POST'
-        })
-          .then(res => {
-
-            if (!res.ok) {
-              console.log("Error in Host Signup")
-            } else {
-              return res.json()
-            }
-          })
-          .then((data) => {
-
-            localStorage.setItem("isHost", true);
-            navigate("/home")
-
-          });
-
-      });
-
-
-
   }
 
   function handleNo() {
@@ -90,19 +59,6 @@ function BecomeHost() {
                   <button type="button" onClick={handleNo} className="btn btn-outline-danger hostdeclineButton">No</button>
                 </div>
               </div>
-              {/* <button
-                  type="submit"
-                  className="btn btn-outline-success hostacceptButton"
-                >
-                  Yes
-                </button>
-                
-                <button
-                  type="submit"
-                  className="btn btn-outline-danger hostdeclineButton"
-                >
-                  No
-                </button> */}
             </div>
 
           </div>

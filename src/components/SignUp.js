@@ -32,17 +32,11 @@ function SignUp() {
                 if (!res.ok) {
                     setError(true);
                 } else {
-                    return res.json()
+                  localStorage.setItem("user", JSON.stringify(res.json()))
+                  setError(false)
+                  navigate("/home")
                 }
             })
-            .then((data) => {
-
-                localStorage.setItem("user", data.email)
-                localStorage.setItem("isHost", data.isHost)
-                setError(false)
-                navigate("/home")
-
-            });
   };
   return (
     <div className="container mt-5 signup-form">

@@ -7,6 +7,9 @@ function MainBody() {
     const [properties, setProperties] = useState(null);
     const [filterText, setFilterText] = useState("");
 
+    const userString = localStorage.getItem('user')
+    const user = JSON.parse(userString)
+
     useEffect(() => {
         const getProperties = () => {
             fetch("properties", {
@@ -18,6 +21,18 @@ function MainBody() {
                 .then(res => res.json())
                 .then((data) => {
                     setProperties(data);
+                });
+            
+                const queryParam = `userId=${user._id}`
+            fetch(`reservations?${queryParam}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    localStorage.setItem('reservations', JSON.stringify(data));
                 });
         }
 

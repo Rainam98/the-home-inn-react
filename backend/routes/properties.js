@@ -220,19 +220,19 @@ router.patch("/:id", async (req, res) => {
 */
 
 
-router.post('/title', async (req, res) => {
+// router.post('/title', async (req, res) => {
 
-  Property.findOne({ title: req.body.title }).then(property => {
+//   Property.findOne({ title: req.body.title }).then(property => {
 
-    res.status(200).json({ propertyId: property._id })
-    console.log("Got the property Id")
+//     res.status(200).json({ propertyId: property._id })
+//     console.log("Got the property Id")
 
-  })
-    .catch((error) => {
-      console.log(error)
-      res.status(404).json({ message: 'No property found with given title' })
-    })
+//   })
+//     .catch((error) => {
+//       console.log(error)
+//       res.status(404).json({ message: 'No property found with given title' })
+//     })
 
-})
+// })
 
 module.exports = router

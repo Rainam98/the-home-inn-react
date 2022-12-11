@@ -45,11 +45,11 @@ const propertiesSchema = new mongoose.Schema({
         required: true
     },
     availabilityFrom: {
-        type: Date,
+        type: String,
         required: true
     },
     availabilityTo: {
-        type: Date,
+        type: String,
         required: true
     },
     propertyType:{

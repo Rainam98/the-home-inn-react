@@ -6,53 +6,32 @@ import Sidemenu from './Sidemenu';
 
 function Favorites() {
     const [properties, setProperties] = useState([]);
-    const [userId, setUserId] = useState('');
 
-    const email = localStorage.getItem("user");
-    const userInput = { emailId: email }
+    const userString = localStorage.getItem('user');
+    const user = JSON.parse(userString);
+
+
     useEffect(() => {
-        fetch("user/emailId", {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            method: 'POST',
-            body: JSON.stringify(userInput),
-        })
-            .then(res => {
-                if (!res.ok) {
 
-                } else {
-                    return res.json()
-                }
-
+        const inputdata = { userId: user._id }
+        const getProperties = () => {
+            fetch('favourites/view', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(inputdata)
             })
-            .then((data) => {
+                .then(res => res.json())
+                .then((data) => {
+                    setProperties(data);
+                });
+        }
 
-                setUserId(data.userId);
-                const userIdToPass = data.userId;
-                console.log("State userId: " + { userId });
-                console.log(userIdToPass);
+        getProperties()
 
-                const inputdata = { userId: userIdToPass }
-                const getProperties = () => {
-                    fetch('favourites/view', {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        method: 'POST',
-                        body: JSON.stringify(inputdata)
-                    })
-                        .then(res => res.json())
-                        .then((data) => {
-                            setProperties(data);
-                        });
-                }
 
-                getProperties()
-
-            });
 
 
 
