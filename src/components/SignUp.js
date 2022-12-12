@@ -8,6 +8,7 @@ function SignUp() {
 
   const [isHost, setIsHost] = useState(false)
   const [error, setError] = useState(false)
+  var isError = false;
 
   const navigate = useNavigate()
   const {
@@ -16,34 +17,43 @@ function SignUp() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    
-    
-        const input = { emailId: data.email, password: data.password, firstName: data.firstName, lastName: data.lastName, mobileNo: data.phone, isHost: isHost };
-        fetch("user/signup", {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(input),
-            method: 'POST'
-        })
-            .then(res => {
-                
-                if (!res.ok) {
-                    setError(true);
-                } else {
-                  localStorage.setItem("user", JSON.stringify(res.json()))
-                  setError(false)
-                  navigate("/home")
-                }
-            })
+
+
+    const input = { emailId: data.email, password: data.password, firstName: data.firstName, lastName: data.lastName, mobileNo: data.phone, isHost: isHost };
+    fetch("user/signup", {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(input),
+      method: 'POST'
+    })
+      .then(res => {
+
+        if (!res.ok) {
+
+          setError(true);
+          isError = true
+        } else {
+          setError(false)
+          isError = false
+          return res.json()
+        }
+      })
+      .then((data) => {
+        if (!error) {
+          localStorage.setItem("user", JSON.stringify(data))
+
+          navigate("/home")
+        }
+      })
   };
   return (
     <div className="container mt-5 signup-form">
       <img src="images/logo.jpg" className="img-fluid" alt="Logo" />
       <Form onSubmit={handleSubmit(onSubmit)}>
-        
-      {(error) === true ? <h4 className="error">Please Signup Again</h4> : null }
+
+        {(error) === true ? <h4 className="error">Please Signup Again</h4> : null}
         <div className="form-group mb-2 mt-4 signup-form-group">
           <Form.Field>
             <label>First Name:</label>
@@ -124,11 +134,11 @@ function SignUp() {
 
         <div className="form-group mb-2 signup-form-group">
           <Form.Field>
-          <input type="checkbox" checked={isHost} onChange={(e) => setIsHost(true)} id="becomeahost" name="isHost"/>
-          <label for="becomeahost" className="medium fw-italic mt-2 pt-1 mb-0 ml-2">Become a host</label>
+            <input type="checkbox" checked={isHost} onChange={(e) => setIsHost(true)} id="becomeahost" name="isHost" />
+            <label for="becomeahost" className="medium fw-italic mt-2 pt-1 mb-0 ml-2">Become a host</label>
           </Form.Field>
         </div>
-        
+
         <div className="text-lg-start mt-4 pt-2">
           <Button type="submit" className="btn loginButton">Sign Up</Button>
 

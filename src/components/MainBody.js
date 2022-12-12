@@ -22,7 +22,7 @@ function MainBody() {
                 .then((data) => {
                     setProperties(data);
                 });
-            
+
             const queryParam = `userId=${user._id}`
             fetch(`reservations?${queryParam}`, {
                 headers: {
@@ -35,24 +35,24 @@ function MainBody() {
                     localStorage.setItem('reservations', JSON.stringify(data));
                 });
 
-                const queryParam1 = `hostId=${user._id}`
-                fetch(`host?${queryParam1}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                })
-                    .then(res => res.json())
-                    .then((data) => {
-                        localStorage.setItem('myProperties', JSON.stringify(data));
-                    });
+            const queryParam1 = `hostId=${user._id}`
+            fetch(`host?${queryParam1}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    localStorage.setItem('myProperties', JSON.stringify(data));
+                });
         }
 
         getProperties()
-        
+
     }, [])
 
-    function handleSearch(value){
+    function handleSearch(value) {
         setFilterText(value)
         const queryString = `searchParam=${value}`
         const getProperties = () => {
@@ -60,7 +60,7 @@ function MainBody() {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                },                
+                },
             })
                 .then(res => res.json())
                 .then((data) => {
@@ -89,9 +89,9 @@ function MainBody() {
             <br></br>
             <SearchBar filterText={filterText}></SearchBar>
             <br></br>
-            
+
             {properties && <Properties properties={properties} isFavorite={false}></Properties>}
-            
+
         </div>
 
     );

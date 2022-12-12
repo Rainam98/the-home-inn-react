@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+
 import Sidemenu from "./Sidemenu";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -28,9 +27,12 @@ function BecomeHost() {
         if (!res.ok) {
           console.log("Error in Host Signup")
         } else {
-          localStorage.setItem("user", JSON.stringify(res.json()));
-        navigate("/home")
+          return res.json()
         }
+      })
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data));
+        navigate("/home")
       })
   }
 

@@ -11,7 +11,7 @@ const Property = require('../models/property')
 router.post('/view', params = async (req, res) => {
   try {
     const allFavourites = await Favourite.findOne({ userId: req.body.userId })
-    console.log("Favourites fetched with for user with id : " + req.body.userId)
+
     const properties = []
     var property = null
 
@@ -42,7 +42,7 @@ router.post('/view', params = async (req, res) => {
 router.post('/add', params = async (req, res) => {
   try {
     const allFavourites = await Favourite.findOne({ userId: req.body.userId })
-    console.log(allFavourites)
+
     var properties = []
 
     if (!allFavourites) {
@@ -53,7 +53,7 @@ router.post('/add', params = async (req, res) => {
         propertyId: properties
 
       })
-      console.log(favouritesprops)
+
       const addedfavourite = await favouritesprops.save()
 
       const finalProperties = []
@@ -94,14 +94,9 @@ router.post('/add', params = async (req, res) => {
           finalProperties.push(property)
         }
       }
-
-
       res.status(200).json(finalProperties)
 
-      //  res.json(allFavourites)
     }
-
-
 
   } catch (err) {
     res.send("No favourites found for user with id : " + req.query.userId)
@@ -114,16 +109,12 @@ router.post('/add', params = async (req, res) => {
 router.post('/remove', params = async (req, res) => {
   try {
     const allFavourites = await Favourite.findOne({ userId: req.body.userId })
-    console.log(allFavourites)
+
     var properties = []
 
     if (!allFavourites) {
-
-
       res.json("User Id not present")
     } else {
-
-
     }
     var properties = allFavourites.propertyId
     var index = properties.indexOf(req.body.propertyId);
@@ -131,31 +122,24 @@ router.post('/remove', params = async (req, res) => {
       properties.splice(index, 1);
     }
 
-
-
     const addedFavourite = await allFavourites.save()
 
-
     const finalProperties = []
-      var property = null
+    var property = null
 
-      let allProperties = addedFavourite.propertyId
+    let allProperties = addedFavourite.propertyId
 
-      if (allProperties != null) {
+    if (allProperties != null) {
 
-        for (var i of allProperties) {
-          property = await Property.findById(i)
-          finalProperties.push(property)
-        }
+      for (var i of allProperties) {
+        property = await Property.findById(i)
+        finalProperties.push(property)
       }
+    }
 
+    res.status(200).json(finalProperties)
 
-      res.status(200).json(finalProperties)
-
-    // res.json(allFavourites)
   }
-
-
 
   catch (err) {
     res.send("No favourites found for user with id : " + req.query.userId)

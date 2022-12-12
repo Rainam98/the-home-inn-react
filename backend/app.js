@@ -5,18 +5,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 
-
-
 bodyParser = require("body-parser");
-const url ='mongodb://localhost/HomeInn'
-mongoose.connect(url, {useNewUrlParser:true})
+const url = 'mongodb://localhost/HomeInn'
+mongoose.connect(url, { useNewUrlParser: true })
 const con = mongoose.connection
 var app = express();
 
-con.on('open', () =>{
-    var date = new Date();
-    console.log(date);
-    console.log('connected to mongodb...')
+con.on('open', () => {
+  var date = new Date();
+  console.log(date);
+  console.log('connected to mongodb...')
 })
 
 
@@ -30,15 +28,8 @@ app.use('/properties', propertiesRouter)
 const reservationRouter = require('./routes/reservations')
 app.use('/reservations', reservationRouter)
 
-
-// const userRouter = require('./routes/usersignup')
-// app.use('/usersignup', userRouter)
-
 const userRouter = require('./routes/user')
 app.use('/user', userRouter)
-
-// const loginRouter = require('./routes/login')
-// app.use('/login', loginRouter)
 
 const hostsignuprouter = require('./routes/hostsignup')
 app.use('/hostsignup', hostsignuprouter)
@@ -65,7 +56,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 

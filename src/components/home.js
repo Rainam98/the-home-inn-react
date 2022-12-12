@@ -7,19 +7,19 @@ import Sidemenu from './Sidemenu';
 function Home() {
 
 
-    return (
-        <div>
-        <div className="wrapper">
+  return (
+    <div>
+      <div className="wrapper">
         <Sidemenu></Sidemenu>
         <div id="content">
           <Header></Header>
           <MainBody></MainBody>
         </div>
-        </div>
-  
-        <Footer></Footer>
       </div>
-    );
+
+      <Footer></Footer>
+    </div>
+  );
 }
 
 export default Home;

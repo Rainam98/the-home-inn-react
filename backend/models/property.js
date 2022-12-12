@@ -52,7 +52,7 @@ const propertiesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    propertyType:{
+    propertyType: {
         type: String,
         required: true
     },
@@ -81,4 +81,4 @@ const propertiesSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Properties',propertiesSchema)
+module.exports = mongoose.model('Properties', propertiesSchema)

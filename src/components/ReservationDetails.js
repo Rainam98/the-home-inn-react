@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Sidemenu from "./Sidemenu";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -7,19 +7,19 @@ import { useNavigate } from "react-router-dom";
 
 function ReservationDetails() {
 
-  
+
   const [error, setError] = useState(false);
   const [isNull, setIsNull] = useState(false);
   var isError = false
 
   const reservationString = localStorage.getItem('reservations');
-  
+
   const reservations = JSON.parse(reservationString);
   const navigate = useNavigate()
-  
+
 
   const propertyDelete = (reservationId) => {
-   
+
     const queryString = `${reservationId}`
     fetch(`reservations/${queryString}`, {
       headers: {
@@ -39,13 +39,13 @@ function ReservationDetails() {
         }
       }).then((data) => {
         console.log(isError)
-        if(!isError){
+        if (!isError) {
 
           localStorage.setItem('reservations', JSON.stringify(data));
           navigate('/home')
         }
       })
-      
+
   };
 
   return (
@@ -57,10 +57,10 @@ function ReservationDetails() {
             <Header></Header>
 
             <div className="App">
-            <h1 className="popular-property">Your Reservations</h1>
-            
+              <h1 className="popular-property">Your Reservations</h1>
 
-              {(error) === true ? <h4 className="error">Cannot delete reservation before 48 hours of checkin or after checkout date</h4> : null }
+
+              {(error) === true ? <h4 className="error">Cannot delete reservation before 48 hours of checkin or after checkout date</h4> : null}
               <br></br>
               {
                 (isNull)
@@ -90,7 +90,7 @@ function ReservationDetails() {
                               ? <td>
                                 <button
                                   type="button"
-                                  onClick={()=>propertyDelete(val.reservationId)}
+                                  onClick={() => propertyDelete(val.reservationId)}
                                   className="deleteRow btn btn-outline-delete propertydetailsdeleteButton"
                                 >
                                   Delete
@@ -109,9 +109,7 @@ function ReservationDetails() {
                       })}
                     </tbody>
                   </table>
-
               }
-
 
             </div>
           </div>

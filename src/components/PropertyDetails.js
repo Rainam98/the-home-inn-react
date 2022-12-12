@@ -26,7 +26,7 @@ function PropertyDetails() {
     }, []);
 
 
-    function handleSubmit(){
+    function handleSubmit() {
         navigate("/addreservation")
     }
 
@@ -46,8 +46,8 @@ function PropertyDetails() {
                         <h1 className="popular-property">Property Details</h1>
                         <DetailsSection property={property}></DetailsSection>
 
-                        {(showRatings) ? <h1 className="popular-property">Reviews about the Property</h1>:null}
-                        {(showRatings) ? <ReviewCards reviews={reviews}></ReviewCards> :null}
+                        {(showRatings) ? <h1 className="popular-property">Reviews about the Property</h1> : null}
+                        {(showRatings) ? <ReviewCards reviews={reviews}></ReviewCards> : null}
 
                         <br></br>
                         <div className="d-flex justify-content-center">

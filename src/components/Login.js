@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -21,16 +21,16 @@ function Login() {
             method: 'POST'
         })
             .then(res => {
-                console.log(res);
+
                 if (res.ok) {
-                    
+
                     setError(false)
                     iserror = false;
                     return res.json()
-                    
+
                 } else {
                     iserror = true;
-                   setError(true);
+                    setError(true);
                     setEmail('');
                     setPass('');
                 }
@@ -38,9 +38,9 @@ function Login() {
             .then((data) => {
 
                 localStorage.setItem("user", JSON.stringify(data));
-                
-                if(iserror){
-                }else{
+
+                if (iserror) {
+                } else {
                     navigate("/home");
                 }
 
@@ -59,9 +59,9 @@ function Login() {
                     </div>
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleSubmit} >
-                        <h1 className="text-secondary">Login to your Account</h1>
+                            <h1 className="text-secondary">Login to your Account</h1>
 
-                        {(error) === true ? <h4 className="error">You have entered wrong credentials</h4> : null }
+                            {(error) === true ? <h4 className="error">You have entered wrong credentials</h4> : null}
                             <div className="form-group mb-4 mt-4">
                                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" className="form-control form-control-lg" placeholder="Enter a valid email address" />
 
@@ -73,19 +73,19 @@ function Login() {
                                     placeholder="Enter password" />
 
                             </div>
-                            
-                                <div className="text-lg-start mt-4 pt-2">
-                                    <button type="submit" className="btn loginButton">Login</button>
-                                    <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/signup"
-                                        className="link-success">Signup</a></p>
-                                </div>
+
+                            <div className="text-lg-start mt-4 pt-2">
+                                <button type="submit" className="btn loginButton">Login</button>
+                                <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/signup"
+                                    className="link-success">Signup</a></p>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
 
         </section>
-        
+
     );
 }
 
