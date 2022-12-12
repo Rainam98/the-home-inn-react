@@ -30,14 +30,7 @@ function Favorites() {
         }
 
         getProperties()
-
-
-
-
-
     }, [])
-
-
 
     return (
         <div>
@@ -56,10 +49,6 @@ function Favorites() {
 
             <Footer></Footer>
         </div>
-
-
-
-
     );
 }
 

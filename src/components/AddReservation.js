@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "semantic-ui-react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import "../main.css";
 import Footer from './Footer';
 import Header from './Header';
@@ -26,10 +26,10 @@ function AddReservation() {
         formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
-        
-        console.log("Code Reaches in onSubmit")
-       
-        const inputData = {guestId: user._id, hostId: property.hostId, propertyId: property._id, checkIn: data.checkIn, checkOut: data.checkOut, numberOfGuests: data.guests}
+
+
+
+        const inputData = { guestId: user._id, hostId: property.hostId, propertyId: property._id, checkIn: data.checkIn, checkOut: data.checkOut, numberOfGuests: data.guests }
         fetch("reservations", {
             headers: {
                 'Content-Type': 'application/json',
@@ -37,13 +37,13 @@ function AddReservation() {
             },
             method: 'POST',
             body: JSON.stringify(inputData),
-            
+
         })
             .then(res => {
-                console.log(res)
+
                 if (!res.ok) {
                     iserror = true
-                   setError(true)
+                    setError(true)
                 } else {
                     iserror = false
                     setError(false)
@@ -52,32 +52,32 @@ function AddReservation() {
             })
             .then((data) => {
 
-                //localStorage.setItem('reservation', data)
+
                 const queryString = `userId=${user._id}`
                 fetch(`reservations?${queryString}`, {
                     headers: {
-                      'Content-Type': 'application/json',
-                      'Accept': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     }
-                  })
+                })
                     .then(res => {
-                      if (!res.ok) {
-                        
-                      } else {
-                        return res.json()
-                      }
+                        if (!res.ok) {
+
+                        } else {
+                            return res.json()
+                        }
                     })
                     .then((values) => {
-                        
-                       localStorage.setItem('reservations', JSON.stringify(values));
-                       if(!iserror){
-                        console.log("code reahes here to navigate")
-                        navigate('/reservationdetails')
-                    }
+
+                        localStorage.setItem('reservations', JSON.stringify(values));
+                        if (!iserror) {
+
+                            navigate('/reservationdetails')
+                        }
                     });
 
 
-                
+
 
             });
     };
@@ -89,9 +89,9 @@ function AddReservation() {
                 <div id="content">
                     <Header></Header>
                     <br />
-            <h1 className="popular-property">Reserve Property</h1>
-            <h3 className="popular-property"><b>Availibility - </b> <Moment format="MM/DD/YYYY">{property.availabilityFrom}</Moment> to <Moment format="MM/DD/YYYY">{property.availabilityTo}</Moment></h3>
-            {(error) === true ? <h4 style={{textAlign: 'center', color:'gray'}}>Property not available in the selected dates!!!</h4> : null }
+                    <h1 className="popular-property">Reserve Property</h1>
+                    <h3 className="popular-property"><b>Availibility - </b> <Moment format="MM/DD/YYYY">{property.availabilityFrom}</Moment> to <Moment format="MM/DD/YYYY">{property.availabilityTo}</Moment></h3>
+                    {(error) === true ? <h4 style={{ textAlign: 'center', color: 'gray' }}>Property not available in the selected dates!!!</h4> : null}
                     <div className="addproperty">
                         <Form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-group mb-2 mt-4 signup-form-group">
@@ -109,12 +109,12 @@ function AddReservation() {
                                                 disabled
                                                 value={property.title}
                                                 placeholder="Property title"
-                                                // {...register("title", { required: true })}
+
                                             />
                                         </div>
                                     </div>
                                 </Form.Field>
-                                {/* {errors.title && <p>This field is required</p>} */}
+
                             </div>
 
                             <div className="form-group mb-2 mt-4 signup-form-group">
@@ -132,12 +132,12 @@ function AddReservation() {
                                                 disabled
                                                 value={user.emailId}
                                                 placeholder="Property title"
-                                                // {...register("title", { required: true })}
+
                                             />
                                         </div>
                                     </div>
                                 </Form.Field>
-                                {/* {errors.title && <p>This field is required</p>} */}
+
                             </div>
 
 

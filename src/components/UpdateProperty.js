@@ -2,19 +2,28 @@ import React from "react";
 import { Form, Button } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
 import "../main.css";
-
+import { useState } from "react";
 import Footer from './Footer';
 import Header from './Header';
 
 import Sidemenu from './Sidemenu';
 import { useNavigate } from "react-router-dom";
 
-function AddProperty() {
+function UpdateProperty() {
+  const [success, setSuccess] = useState(false);
 
-  const userString = localStorage.getItem("user")
-  const user = JSON.parse(userString)
+  const stringData = localStorage.getItem('propertytoupdate')
 
-  const navigate = useNavigate()
+  const [property, setProperty] = useState(JSON.parse(stringData));
+  const [description, setDescription] = useState(property.description);
+  const [nightlyFee, setNightlyFee] = useState(property.nightlyFee);
+  const [serviceFee, setServiceFee] = useState(property.serviceFee);
+  const [cleaningFee, setCleaningFee] = useState(property.cleaningFee);
+  const [amenities, setAmenities] = useState(property.amenities);
+  const [bedrooms, setBedrooms] = useState(property.bedrooms);
+  const [availabilityFrom, setAvailabilityFrom] = useState(property.availabilityFrom);
+  const [availabilityTo, setAvailabilityTo] = useState(property.availabilityTo);
+
   const {
     register,
     handleSubmit,
@@ -22,38 +31,38 @@ function AddProperty() {
   } = useForm();
   const onSubmit = (data) => {
 
-    var formdata = new FormData();
-    // formdata.append('imgSrc', data.img[0]);
 
 
-    console.log(data)
     const input = {
-      hostId: user._id, title: data.title, description: data.description, nightlyFee: data.nightlyFee,
-      serviceFee: data.serviceFee, cleaningFee: data.cleaningFee, amenities: data.amenities,
-      bedRooms: data.bedrooms, guests: data.guests, availabilityFrom: data.availabilityFrom,
-      availabilityTo: data.availabilityTo, propertyType: data.propertyType, address: { city: data.city, state: data.state, country: data.country }
+      description: description, nightlyFee: data.nightlyFee,
+      serviceFee: serviceFee, cleaningFee: cleaningFee, amenities: amenities,
+      bedRooms: bedrooms, availabilityFrom: availabilityFrom,
+      availabilityTo: availabilityTo
     };
     console.log(input)
 
-    fetch('properties', {
+    fetch(`properties/${property._id}`, {
       headers: {
         "Content-Type": "application/json"
       },
-      method: 'POST',
+      method: 'PATCH',
       body: JSON.stringify(input)
     })
       .then(res => {
         if (!res.ok) {
+          console.log("Some Error")
+          setSuccess(false)
         } else {
+          console.log("Done!!")
+          setSuccess(true)
           return res.json()
         }
       }).then((data) => {
-        console.log(data)
-        navigate('/home')
+
       })
 
-  };
 
+  };
 
   return (
     <div>
@@ -70,30 +79,11 @@ function AddProperty() {
 
 
 
-            <h1 className="popular-property">Add your property</h1>
+            <h1 className="popular-property">Update {property.title}</h1>
+            {(success) === true ? <h4 className="success">Your Property was updated successfully!!</h4> : null}
             <div className="addproperty">
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <div className="form-group mb-2 mt-4 signup-form-group">
-                  <Form.Field>
-                    <div className="row">
-                      <div className="col-md-7">
-                        <label>Property title</label>
-                      </div>
-                      <div className="col-md-5">
-                        <input
-                          className="form-control form-field"
-                          type="text"
 
-                          name="title"
-                          id="title"
-                          placeholder="Property title"
-                          {...register("title", { required: true })}
-                        />
-                      </div>
-                    </div>
-                  </Form.Field>
-                  {errors.title && <p>This field is required</p>}
-                </div>
 
                 <div className="form-group mb-2 mt-4 signup-form-group">
                   <Form.Field>
@@ -105,9 +95,10 @@ function AddProperty() {
                         <input
                           className="form-control form-field"
                           type="text"
-
+                          onChange={(e) => setDescription(e.target.value)}
                           name="description"
                           id="description"
+                          defaultValue={description}
                           placeholder="Description"
                           {...register("description", { required: true })}
                         />
@@ -121,119 +112,14 @@ function AddProperty() {
                   <Form.Field>
                     <div className="row">
                       <div className="col-md-7">
-                        <label>Upload property Images</label>
-                      </div>
-                      <div className="col-md-5">
-                        <input
-                          type="file"
-
-                          name="img"
-                          id="img"
-                          accept="image/jpg"
-                          {...register("img", { required: true })}
-                        />
-                      </div>
-                    </div>
-                  </Form.Field>
-                  {errors.img && <p>This field is required</p>}
-                </div>
-
-                <div className="form-group mb-2 mt-4 signup-form-group">
-                  <Form.Field>
-                    <div className="row">
-                      <div className="col-md-7">
-                        <label>Property Type</label>
-                      </div>
-                      <div className="col-md-5">
-                        <input
-                          className="form-control form-field"
-                          type="text"
-
-                          name="propertyType"
-                          id="propertyType"
-                          placeholder="Property type"
-                          {...register("propertyType", { required: true })}
-                        />
-                      </div>
-                    </div>
-                  </Form.Field>
-                  {errors.propertyType && <p>This field is required</p>}
-                </div>
-
-                <div className="form-group mb-2 mt-4 signup-form-group">
-                  <Form.Field>
-                    <div className="row">
-                      <div className="col-md-7">
-                        <label>City</label>
-                      </div>
-                      <div className="col-md-5">
-                        <input
-                          className="form-control form-field"
-                          type="text"
-                          name="city"
-                          id="city"
-                          placeholder="Enter city name"
-                          {...register("city", { required: true })}
-                        />
-                      </div>
-                    </div>
-                  </Form.Field>
-                  {errors.city && <p>This field is required</p>}
-                </div>
-
-                <div className="form-group mb-2 mt-4 signup-form-group">
-                  <Form.Field>
-                    <div className="row">
-                      <div className="col-md-7">
-                        <label>State</label>
-                      </div>
-                      <div className="col-md-5">
-                        <input
-                          className="form-control form-field"
-                          type="text"
-                          name="state"
-                          id="state"
-                          placeholder="Enter state name"
-                          {...register("state", { required: true })}
-                        />
-                      </div>
-                    </div>
-                  </Form.Field>
-                  {errors.state && <p>This field is required</p>}
-                </div>
-
-                <div className="form-group mb-2 mt-4 signup-form-group">
-                  <Form.Field>
-                    <div className="row">
-                      <div className="col-md-7">
-                        <label>Country</label>
-                      </div>
-                      <div className="col-md-5">
-                        <input
-                          className="form-control form-field"
-                          type="text"
-                          name="country"
-                          id="country"
-                          placeholder="Enter country name"
-                          {...register("country", { required: true })}
-                        />
-                      </div>
-                    </div>
-                  </Form.Field>
-                  {errors.country && <p>This field is required</p>}
-                </div>
-
-                <div className="form-group mb-2 mt-4 signup-form-group">
-                  <Form.Field>
-                    <div className="row">
-                      <div className="col-md-7">
                         <label>Nightly Fees</label>
                       </div>
                       <div className="col-md-5">
                         <input
                           className="form-control form-field"
                           type="number"
-
+                          onChange={(e) => setNightlyFee(e.target.value)}
+                          defaultValue={nightlyFee}
                           name="nightlyFee"
                           id="nightlyFee"
                           placeholder="in USD"
@@ -255,7 +141,8 @@ function AddProperty() {
                         <input
                           className="form-control form-field"
                           type="number"
-
+                          defaultValue={serviceFee}
+                          onChange={(e) => setServiceFee(e.target.value)}
                           name="serviceFee"
                           id="serviceFee"
                           placeholder="in USD"
@@ -277,7 +164,8 @@ function AddProperty() {
                         <input
                           className="form-control form-field"
                           type="number"
-
+                          defaultValue={cleaningFee}
+                          onChange={(e) => setCleaningFee(e.target.value)}
                           name="cleaningFee"
                           id="cleaningFee"
                           placeholder="in USD"
@@ -299,7 +187,8 @@ function AddProperty() {
                         <input
                           className="form-control form-field"
                           type="text"
-
+                          defaultValue={amenities}
+                          onChange={(e) => setAmenities(e.target.value)}
                           name="amenities"
                           id="amenities"
                           placeholder="eg. Swimming Pool, Free Parking, etc."
@@ -321,7 +210,8 @@ function AddProperty() {
                         <input
                           className="form-control form-field"
                           type="number"
-
+                          defaultValue={bedrooms}
+                          onChange={(e) => setBedrooms(e.target.value)}
                           name="bedrooms"
                           id="bedrooms"
                           placeholder="no. of bedrooms"
@@ -337,35 +227,14 @@ function AddProperty() {
                   <Form.Field>
                     <div className="row">
                       <div className="col-md-7">
-                        <label>Guests</label>
-                      </div>
-                      <div className="col-md-5">
-                        <input
-                          className="form-control form-field"
-                          type="number"
-
-                          name="guests"
-                          id="guests"
-                          placeholder="maximum of guests allowed per room"
-                          {...register("guests", { required: true })}
-                        />
-                      </div>
-                    </div>
-                  </Form.Field>
-                  {errors.guests && <p>This field is required</p>}
-                </div>
-
-                <div className="form-group mb-2 mt-4 signup-form-group">
-                  <Form.Field>
-                    <div className="row">
-                      <div className="col-md-7">
                         <label>Available from</label>
                       </div>
                       <div className="col-md-5">
                         <input
                           className="form-control form-field"
                           type="date"
-
+                          defaultValue={availabilityFrom}
+                          onChange={(e) => setAvailabilityFrom(e.target.value)}
                           name="availabilityFrom"
                           id="availabilityFrom"
                           placeholder="Property title"
@@ -387,7 +256,8 @@ function AddProperty() {
                         <input
                           className="form-control form-field"
                           type="date"
-
+                          defaultValue={availabilityTo}
+                          onChange={(e) => setAvailabilityTo(e.target.value)}
                           name="availabilityTo"
                           id="availabilityTo"
                           placeholder="Property title"
@@ -403,7 +273,7 @@ function AddProperty() {
 
                 <div className="text-lg-start mt-4 pt-2">
                   <Button type="submit" className="btn loginButton">
-                    Submit
+                    Update
                   </Button>
                 </div>
               </Form>
@@ -416,4 +286,4 @@ function AddProperty() {
   );
 }
 
-export default AddProperty;
+export default UpdateProperty;

@@ -12,7 +12,7 @@ const ReviewCards = ({ reviews }) => {
                         return (
                             <div className="card review-card">
                                 <div className="card-header">
-                                {review.rating}  <i className="bi bi-star-fill"></i>
+                                    {review.rating}  <i className="bi bi-star-fill"></i>
                                 </div>
                                 <div className="card-body">
                                     <blockquote className="blockquote mb-0">

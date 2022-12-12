@@ -6,8 +6,6 @@ const bcrypt = require('bcryptjs')
 // API for user login . Login with email and password
 // Eg request : POST http://localhost:9000/user/login
 
-
-
 router.post('/login', async (req, res) => {
 
     User.findOne({ emailId: req.body.emailId }).then(user => {
@@ -45,32 +43,10 @@ router.post('/signup', async (req, res) => {
 
     try {
         const addedUser = await user.save()
-        console.log("New user Added!!");
         res.status(200).json(addedUser)
     } catch (err) {
-        res.status(404).json({ message : 'There was an issue adding the user. Please try again later!!'})
+        res.status(404).json({ message: 'There was an issue adding the user. Please try again later!!' })
     }
 })
-
-// API for user login . Login with email and password
-// Eg request : POST http://localhost:9000/user/emailId
-
-
-
-// router.post('/emailId', async (req, res) => {
-
-//     User.findOne({ emailId: req.body.emailId }).then(user => {
-        
-//             res.status(200).json({ userId: user._id })
-//             console.log("Got the user Id")
-       
-//     })
-//         .catch((error) => {
-//             console.log(error)
-//             res.status(404).json({ message: 'No user find with given emailId' })
-//         })
-
-// })
-
 
 module.exports = router

@@ -14,36 +14,36 @@ const Reviews = require('../models/reviews')
   }
 */
 
-router.post('/', async(req,res)=>{
-    const reviews = new Reviews({
-        userId: req.body.userId,
-        propertyId: req.body.propertyId,
-        comment: req.body.comment,
-        rating: req.body.rating
-    })
-  
-    try{
-       const addedReview=await reviews.save()
-       console.log("New Review added!!")
-       res.status(200).json(addedReview)
-    }catch(err){
-        res.status(404).json({message:"There was an issue adding the review. Please try again later!!"})
-        console.log("Error adding review")
-    }
+router.post('/', async (req, res) => {
+  const reviews = new Reviews({
+    userId: req.body.userId,
+    propertyId: req.body.propertyId,
+    comment: req.body.comment,
+    rating: req.body.rating
   })
 
-  // API for getting all reviews of a property
+  try {
+    const addedReview = await reviews.save()
+    console.log("New Review added!!")
+    res.status(200).json(addedReview)
+  } catch (err) {
+    res.status(404).json({ message: "There was an issue adding the review. Please try again later!!" })
+    console.log("Error adding review")
+  }
+})
+
+// API for getting all reviews of a property
 // Eg request : POST http://localhost:9000/review/
-  router.get('/:propertyId', async (req, res) => {
-    try {
-      const reviews = await Reviews.find({propertyId:req.params.propertyId})
-      console.log(reviews)
-      res.status(200).json(reviews)
-      console.log("All reviews fetched")
-  
-    } catch (err) {
-      res.status(404).json({ message: 'Error' + err })
-    }
-  })
+router.get('/:propertyId', async (req, res) => {
+  try {
+    const reviews = await Reviews.find({ propertyId: req.params.propertyId })
+    console.log(reviews)
+    res.status(200).json(reviews)
+    console.log("All reviews fetched")
 
-  module.exports= router
+  } catch (err) {
+    res.status(404).json({ message: 'Error' + err })
+  }
+})
+
+module.exports = router

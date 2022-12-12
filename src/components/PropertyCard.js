@@ -38,16 +38,10 @@ const PropertyCard = ({ property, isFavourite }) => {
     }
 
     function handleAddFavorites() {
-        // localStorage.setItem("property", JSON.stringify(property))
 
-        // const propertyString = localStorage.getItem('property');
-        // const property = JSON.parse(propertyString);
-
-
-        // setFavorite(true);
         const userString = localStorage.getItem('user');
         const user = JSON.parse(userString);
-
+        console.log(user)
         const inputdata = { userId: user._id, propertyId: property._id }
         const getProperties = () => {
             fetch('favourites/add', {
@@ -71,14 +65,7 @@ const PropertyCard = ({ property, isFavourite }) => {
 
     }
     function handleRemoveFavorites() {
-        // localStorage.setItem("property", JSON.stringify(property))
 
-        // // setFavorite(false);
-        // const propertyString = localStorage.getItem('property');
-        // const property = JSON.parse(propertyString);
-
-
-        // setFavorite(true);
         const userString = localStorage.getItem('user');
         const user = JSON.parse(userString);
 
@@ -116,11 +103,9 @@ const PropertyCard = ({ property, isFavourite }) => {
             <div className="card">
                 <img src={property.imgSrc} className="card-img-top" alt="..." />
                 <div className="card-body">
-                    {/* <div className='row'> */}
-                    <h5 className="card-title">{property.title}</h5>
-                    {/* <i className="bi bi-star col-md-3 card-star">{property.rating}</i> */}
 
-                    {/* </div> */}
+                    <h5 className="card-title">{property.title}</h5>
+
                     <br></br>
                     <p className="card-text"><b>Location -</b> {property.address.city}, {property.address.state}</p>
                     <p className="card-text"><b>Rates from -</b> {property.nightlyFee}$ per night.</p>

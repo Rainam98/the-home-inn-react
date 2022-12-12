@@ -9,28 +9,29 @@ function ViewProperty() {
 
   const navigate = useNavigate()
 
-  const propertyUpdate = () => {
-    
+  const propertyUpdate = (property) => {
+    localStorage.setItem("propertytoupdate", JSON.stringify(property))
+    navigate('/updateproperty')
   };
 
 
 
   const propertyDelete = (propertyId) => {
-    const input = {propertyId: propertyId}
+    const input = { propertyId: propertyId }
     console.log(propertyId)
     fetch('host/delete', {
       headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
-      method:'POST',
+      method: 'POST',
       body: JSON.stringify(input)
-  })
+    })
       .then(res => res.json())
       .then((data) => {
-          
-          navigate('/home')
-          
+
+        navigate('/home')
+
       });
   };
 
@@ -53,7 +54,7 @@ function ViewProperty() {
                 <thead>
                   <tr>
                     <th>Property Title</th>
-                    
+
                     <th>No. of Guests</th>
                     <th>City</th>
                     <th>State</th>
@@ -75,14 +76,14 @@ function ViewProperty() {
                         <td>
                           <button
                             type="button"
-                            onClick={()=>propertyDelete(val._id)}
+                            onClick={() => propertyUpdate(val)}
                             className="deleteRow btn btn-outline-warning propertydetailsupdateButton"
                           >
                             Update
                           </button>
                           <button
                             type="button"
-                            onClick={()=>propertyDelete(val._id)}
+                            onClick={() => propertyDelete(val._id)}
                             className="deleteRow btn btn-outline-delete propertydetailsdeleteButton"
                           >
                             Delete
